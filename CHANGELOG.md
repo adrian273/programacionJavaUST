@@ -1,3 +1,7 @@
+# [0.0.4] 19-03-2018
+## Added
+- Excepciones de carga [[validacionRegistroEnum]
+
 # [0.0.3] 16-03-2018
 ## Added
 - Ejemplo de Agregar un registro, validar un Enum, con clases anidadas [validacionRegistroEnum]

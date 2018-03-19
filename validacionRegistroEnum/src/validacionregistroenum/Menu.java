@@ -77,7 +77,7 @@ public class Menu {
     class Singer {
 
         private String generoMusical, nombre, nacionalidad;
-        private int edad;
+        private int edad, carga;
         boolean request = false;
 
         public Singer() {
@@ -88,7 +88,7 @@ public class Menu {
          * @return true para verificar si existe el dato ingresado en el
          * enumerador
          */
-        public boolean verification() {
+        public boolean verification() throws ExceptValidation {
             System.out.println("Ingrese genero musical");
             // @metodo toUpperCase() convierte las palabras en mayusculas
             generoMusical = input.next().toUpperCase();
@@ -113,7 +113,7 @@ public class Menu {
          *
          * @param gm generomusical existente.
          */
-        public void addSinger(GeneroMusicalData gm) {
+        public void addSinger(GeneroMusicalData gm) throws ExceptValidation {
             try {
                 System.out.println("nombre: ");
                 nombre = input.next();
@@ -121,10 +121,12 @@ public class Menu {
                 nacionalidad = input.next();
                 System.out.println("Edad");
                 edad = input.nextInt();
-                Cantante c = new Cantante(nombre, nacionalidad, edad, gm);
+                System.out.println("Cantidad de hijos");
+                carga = input.nextInt();
+                Cantante c = new Cantante(nombre, nacionalidad, edad, gm, carga);
                 cantante.add(c);
             } catch (Exception e) {
-                System.out.println(e);
+                throw new ExceptValidation(carga, "Valor de carga no numerico");
             }
         }
 

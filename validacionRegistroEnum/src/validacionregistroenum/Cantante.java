@@ -10,13 +10,19 @@ public class Cantante {
     private String nacionalidad;
     private int edad;
 
+    /**
+     * @var carga : numero de hijos
+     */
+    private int carga;
+
     GeneroMusicalData gM;
 
-    public Cantante(String nombre, String nacionalidad, int edad, GeneroMusicalData gM) {
+    public Cantante(String nombre, String nacionalidad, int edad, GeneroMusicalData gM, int carga) {
         this.nombre = nombre;
         this.nacionalidad = nacionalidad;
         this.edad = edad;
         this.gM = gM;
+        this.carga = carga;
     }
 
     public Cantante() {
@@ -85,5 +91,15 @@ public class Cantante {
     public void setgM(GeneroMusicalData gM) {
         this.gM = gM;
     }
+
+    public int getCarga() {
+        return carga;
+    }
+
+    public void setCarga(int carga) {
+        this.carga = carga;
+    }
+    
+    
 
 }
