@@ -1,6 +1,19 @@
+# [0.0.6] 29-03-2018
+## fixed
+- [tallerTrabajador]
+- TestTrabajador jUnit
+
+# [0.0.5] 28-03-2018
+## Added
+- [tallerTrabajador]
+- Agregado enum{estado civil}
+- Trabajador clase 
+- Agregar Trabajador , Ver trabajador, TestTrabajador jUnit
+- [trabajadores] ** Taller con nota XD
+
 # [0.0.4] 19-03-2018
 ## Added
-- Excepciones de carga [[validacionRegistroEnum]
+- Excepciones de carga [validacionRegistroEnum]
 
 # [0.0.3] 16-03-2018
 ## Added
