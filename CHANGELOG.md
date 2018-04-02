@@ -1,3 +1,8 @@
+# [0.0.7] 30-03-2018
+## Added
+- [tallerTrabajadorPractica]
+- Agregado la practica numero dos de este taller
+
 # [0.0.6] 29-03-2018
 ## fixed
 - [tallerTrabajador]
