@@ -5,7 +5,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
- * 
+ *
  * @author Adrian
  */
 public class TallerTrabajadorPractica {
@@ -25,17 +25,18 @@ public class TallerTrabajadorPractica {
         try {
             System.out.println("~ ingrese nombre: ");
             String nombre = input.next();
+            assert nombre == "" : "DATO VACIO";
             System.out.println("~ ingrese valor hora: ");
             int valorHora = input.nextInt();
             System.out.println("~ ingrese horas trabajadas: ");
             int horaTrabajada = input.nextInt();
             System.out.println("~ ingrese cargas: ");
             int carga = input.nextInt();
-            System.out.println("~ ingrese estado civil: ");
+            System.out.println("~ ingrese cargo: ");
             String estado = input.next();
             VerificState v = new VerificState(estado);
             if (v.vS()) {
-                Trabajador tD = new Trabajador(nombre, valorHora, horaTrabajada, carga, EstadoCivil.valueOf(v.getState()));
+                Trabajador tD = new Trabajador(nombre, valorHora, horaTrabajada, carga, Cargo.valueOf(v.getState()));
                 dataE.add(tD);
             } else {
                 System.out.println("[ERROR] ~ no existe el enumerador");
@@ -46,14 +47,15 @@ public class TallerTrabajadorPractica {
             System.out.println("[error] input match");
         }
     }
-    
+
     /**
      * @todo ver datos del trabajador
      */
     public void viewDataE() {
         if (!dataE.isEmpty()) {
+            System.out.println("Nombre \t valor_hora \t hora_trabajada \t sueldo_total \n");
             dataE.forEach((Trabajador item) -> {
-                System.out.println(item.getNombre());
+                System.out.printf("%s \t %d \t %d \t \t$%d \n", item.getNombre(), item.getValorHora(), item.getHorasTrabajada(), item.calcularSueldo(item.getValorHora(), item.getHorasTrabajada(), item.getCarga()));
             });
         } else {
             System.out.println("[warning] ~ No hay datos ingresados");
@@ -63,7 +65,7 @@ public class TallerTrabajadorPractica {
 
     /**
      * @since 1.0
-     * @todo Verificar si existe el estado civil ingresado en el enumerador
+     * @todo Verificar si existe el cargo ingresado en el enumerador
      */
     class VerificState {
 
@@ -84,7 +86,7 @@ public class TallerTrabajadorPractica {
         }
 
         public boolean vS() {
-            for (EstadoCivil eS : EstadoCivil.values()) {
+            for (Cargo eS : Cargo.values()) {
                 if (eS.name().equals(this.getState().toUpperCase())) {
                     return this.r = true;
                 }

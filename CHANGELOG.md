@@ -1,3 +1,9 @@
+# [0.0.9] 15-04-2018
+- calculadora [beta]
+- clase11Abril [elementos de entorno grafico java]
+- pruebaTrabajador
+
+
 # [0.0.7] 30-03-2018
 ## Added
 - [tallerTrabajadorPractica]

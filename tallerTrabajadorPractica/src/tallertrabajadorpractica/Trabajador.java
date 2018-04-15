@@ -11,9 +11,9 @@ public class Trabajador {
     private int valorHora;
     private int  horasTrabajada;
     private int carga;
-    private EstadoCivil eC;
+    private Cargo eC;
 
-    public Trabajador(String nombre, int valorHora, int horasTrabajada, int carga, EstadoCivil eC) {
+    public Trabajador(String nombre, int valorHora, int horasTrabajada, int carga, Cargo eC) {
         this.nombre = nombre;
         this.valorHora = valorHora;
         this.horasTrabajada = horasTrabajada;
@@ -56,11 +56,11 @@ public class Trabajador {
         this.carga = carga;
     }
 
-    public EstadoCivil geteC() {
+    public Cargo geteC() {
         return eC;
     }
 
-    public void seteC(EstadoCivil eC) {
+    public void seteC(Cargo eC) {
         this.eC = eC;
     }
 
@@ -77,15 +77,20 @@ public class Trabajador {
      * @return sueldo total
      */
     public int calcularSueldo(int vH, int hT, int c) {
-        int sueldo = vH  * hT;
+        
         int sueldoTotal = 0;
-        if(c > 1 && c < 3) {
-            sueldoTotal = (int) ((int) sueldo * 1.05);
+        if(hT > 45) {
+            vH = (int) (vH * 1.5);
         }
-        else if(c >= 3 && c < 6) {
-            sueldoTotal = (int) ((int) sueldo * 1.08);
+        int sueldo = vH  * hT;
+        
+        if(c == 2 || c == 3) {
+            sueldoTotal = (int) ((int) sueldo * 1.04);
         }
-        else {
+        else if(c == 4 || c == 5) {
+            sueldoTotal = (int) ((int) sueldo * 1.07);
+        }
+        else if (c > 6){
             sueldoTotal = (int) ((int) sueldo * 1.1);
         }
         return sueldoTotal;

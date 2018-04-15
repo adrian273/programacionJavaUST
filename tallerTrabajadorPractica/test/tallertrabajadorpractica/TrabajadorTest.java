@@ -134,8 +134,8 @@ public class TrabajadorTest {
     @Test
     public void testGeteC() {
         System.out.println("geteC");
-        EstadoCivil expResult = EstadoCivil.CASADO;
-        EstadoCivil result = instance.geteC().CASADO;
+        Cargo expResult = Cargo.APRENDIS;
+        Cargo result = instance.geteC().APRENDIS;
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
     }
@@ -146,7 +146,7 @@ public class TrabajadorTest {
     @Test
     public void testSeteC() {
         System.out.println("seteC");
-        EstadoCivil eC = EstadoCivil.CASADO;
+        Cargo eC = Cargo.APRENDIS;
         instance.seteC(eC);
         // TODO review the generated test code and remove the default call to fail.
     }
@@ -171,8 +171,8 @@ public class TrabajadorTest {
         System.out.println("calcularSueldo");
         int vH = 500;
         int hT = 2;
-        int c = 6;
-        int expResult = 9600;
+        int c = 8;
+        int expResult = 1100;
         int result = instance.calcularSueldo(vH, hT, c);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
