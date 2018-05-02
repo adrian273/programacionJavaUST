@@ -1,3 +1,7 @@
+# [0.1.0] 01-05-2018
+- Agregada interfaz biblioteca [bliblioteca]
+- Funciones agregar y mostrar [bliblioteca]
+
 # [0.0.9] 15-04-2018
 - calculadora [beta]
 - clase11Abril [elementos de entorno grafico java]
