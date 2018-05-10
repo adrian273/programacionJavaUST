@@ -6,7 +6,6 @@
 package biblioteca;
 
 import java.awt.Frame;
-import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -139,7 +138,9 @@ public class Mostrar extends javax.swing.JInternalFrame {
 
     private void cargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarActionPerformed
         // TODO add your handling code here:
-
+        this.setVisible(false);
+        llenarTabla();
+        this.setVisible(true);
     }//GEN-LAST:event_cargarActionPerformed
 
     public void editarDatos() {
@@ -152,7 +153,7 @@ public class Mostrar extends javax.swing.JInternalFrame {
             System.out.println(fechaNacimiento);
             String resena = (String) this.jTDataAutor.getValueAt(registro, 3);
             Frame f = JOptionPane.getFrameForComponent(this);
-            EditarForm e = new EditarForm(f, true, name, fechaNacimiento, resena);
+            EditarForm e = new EditarForm(f, true, name, fechaNacimiento, resena, registro);
             e.setVisible(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -166,10 +167,12 @@ public class Mostrar extends javax.swing.JInternalFrame {
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
         // TODO add your handling code here:
+        int reg = this.jTDataAutor.getSelectedRow();
         try {
             int resp = JOptionPane.showConfirmDialog(null, "¿Estas seguto de eliminar?");
             if (JOptionPane.OK_OPTION == resp) {
-                JOptionPane.showMessageDialog(null, "eliminado con exito");
+                JOptionPane.showMessageDialog(null, "eliminado con exito: N°: " + reg);
+                Principal.autorData.remove(reg);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);

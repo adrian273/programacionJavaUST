@@ -10,23 +10,39 @@ package biblioteca;
  * @author adrian
  */
 public class EditarForm extends javax.swing.JDialog {
-    String nombre, fechaNacimiento, resena;
 
-    public EditarForm(java.awt.Frame parent, boolean modal, String nombre, String fechaNacimiento, String resena) {
+    String nombre, fechaNacimiento, resena;
+    int numeroRegistro;
+    Genero genero;
+
+    public EditarForm(java.awt.Frame parent, boolean modal, String nombre, String fechaNacimiento, String resena, int numeroRegistro) {
         super(parent, modal);
         this.nombre = nombre;
         this.fechaNacimiento = fechaNacimiento;
         this.resena = resena;
-         initComponents();
-         cargarData();
+        this.genero = genero;
+        this.numeroRegistro = numeroRegistro;
+        initComponents();
+        cargarData();
+        loadDataComboBox();
     }
-    
+
     public void cargarData() {
         this.setTitle("Edicion de autor: " + this.nombre);
-         this.jtNombre.setText(this.nombre);
-         this.jtFechaNacimiento.setText(this.fechaNacimiento);
-         this.jtResena.setText(this.resena);
+        this.jtNombre.setText(this.nombre);
+        this.jtFechaNacimiento.setText(this.fechaNacimiento);
+        this.jtResena.setText(this.resena);
     }
+
+    public void loadDataComboBox() {
+        this.jcGenero.removeAllItems();
+        this.jcGenero.addItem("");
+        Genero[] tipoGenero = Genero.values();
+        for (Genero g : tipoGenero) {
+            this.jcGenero.addItem(g.name());
+        }
+    }
+
     /**
      * Creates new form EditarForm
      */
@@ -49,10 +65,10 @@ public class EditarForm extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jtFechaNacimiento = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jtResena = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
+        jcGenero = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -70,8 +86,15 @@ public class EditarForm extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/guardar.png"))); // NOI18N
-        jButton1.setText("Guardar");
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/guardar.png"))); // NOI18N
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+
+        jcGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -80,7 +103,7 @@ public class EditarForm extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel4)
@@ -89,10 +112,10 @@ public class EditarForm extends javax.swing.JDialog {
                             .addComponent(jLabel2))
                         .addGap(55, 55, 55)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField3)
                             .addComponent(jtFechaNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
                             .addComponent(jtNombre)
-                            .addComponent(jtResena))))
+                            .addComponent(jtResena)
+                            .addComponent(jcGenero, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -109,13 +132,13 @@ public class EditarForm extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jtResena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addComponent(btnGuardar)
                 .addGap(24, 24, 24))
         );
 
@@ -125,6 +148,13 @@ public class EditarForm extends javax.swing.JDialog {
     private void jtResenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtResenaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtResenaActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+        Principal.autorData.get(this.numeroRegistro).setFechaNacimiento(this.jtNombre.getText());
+        Principal.autorData.get(this.numeroRegistro).setNombre(this.jtFechaNacimiento.getText());
+        Principal.autorData.get(this.numeroRegistro).setResena(this.jtResena.getText());
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -169,12 +199,12 @@ public class EditarForm extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JComboBox<String> jcGenero;
     private javax.swing.JTextField jtFechaNacimiento;
     private javax.swing.JTextField jtNombre;
     private javax.swing.JTextField jtResena;

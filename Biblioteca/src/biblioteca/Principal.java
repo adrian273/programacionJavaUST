@@ -150,7 +150,13 @@ public class Principal extends javax.swing.JFrame {
         this.desktopPrimary.add(m);
         m.setVisible(true);
     }//GEN-LAST:event_mMostrarActionPerformed
-
+    
+    public  void loadTable() {
+        Mostrar view = new Mostrar();
+        view.setVisible(false);
+        this.desktopPrimary.add(view);
+        view.setVisible(true);
+    }
     /**
      * @param args the command line arguments
      */

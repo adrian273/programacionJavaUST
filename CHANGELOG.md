@@ -1,3 +1,9 @@
+#[0.1.9] 10-05-2018
+## Added
+- Proyecto de ventas [ventasProductos]
+## Update
+- Edicion de bliblioteca [bliblioteca]
+
 # [0.1.0] 01-05-2018
 - Agregada interfaz biblioteca [bliblioteca]
 - Funciones agregar y mostrar [bliblioteca]
