@@ -21,6 +21,13 @@ public class Productos {
     public Productos() {
     }
 
+    public Productos(String nombre, String codigo, int costo) {
+        this.nombre = nombre;
+        this.codigo = codigo;
+        this.costo = costo;
+    }
+    
+
     public String getNombre() {
         return nombre;
     }
