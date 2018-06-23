@@ -320,8 +320,11 @@ public class CrudClientes extends javax.swing.JInternalFrame {
                             + valor + "';";
                     c.actionRecord(squery);
                     JOptionPane.showMessageDialog(null, "Eliminado Correctamente", "success", JOptionPane.INFORMATION_MESSAGE);
+                    loadDataClient();
                 } catch (ClassNotFoundException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                } catch (SQLException ex) {
+                    Logger.getLogger(CrudClientes.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
             }
