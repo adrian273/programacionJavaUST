@@ -68,4 +68,12 @@ public class Coneccion {
         rs = instruct.executeQuery(query);
         return rs;
     }
+    
+    public ResultSet viewVehiculo() throws SQLException {
+        String query = "SELECT * FROM vehiculos, marcas, clientes "
+                + "WHERE marcas.idMarca = vehiculos.marcas_idMarca "
+                + "AND clientes.rutCliente = vehiculos.clientes_rutCliente";
+        rs = instruct.executeQuery(query);
+        return rs;
+    }
 }
