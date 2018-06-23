@@ -33,6 +33,23 @@ public class Coneccion {
         }
     }
 
+    public Connection getLink() {
+        return link;
+    }
+
+    public void setLink(Connection link) {
+        this.link = link;
+    }
+
+    public Statement getInstruct() {
+        return instruct;
+    }
+
+    public void setInstruct(Statement instruct) {
+        this.instruct = instruct;
+    }
+    
+
     /**
      * Executar Querys de tipo insert, update, delete
      *
@@ -46,34 +63,5 @@ public class Coneccion {
         }
     }
 
-    /**
-     *
-     * @return datos de los clientes
-     * @throws SQLException
-     */
-    public ResultSet viewClientes() throws SQLException {
-        String query = "SELECT * FROM clientes ORDER BY fechaCreacionCliente DESC";
-        rs = instruct.executeQuery(query);
-        return rs;
-    }
-
-    /**
-     *
-     * @param rut
-     * @return rut cliente si es que existe en la base de datos
-     */
-    public ResultSet verificarRutExistente(String rut) throws SQLException {
-        String query = "SELECT rutCliente FROM clientes WHERE rutCliente = '"
-                + rut + " ';";
-        rs = instruct.executeQuery(query);
-        return rs;
-    }
     
-    public ResultSet viewVehiculo() throws SQLException {
-        String query = "SELECT * FROM vehiculos, marcas, clientes "
-                + "WHERE marcas.idMarca = vehiculos.marcas_idMarca "
-                + "AND clientes.rutCliente = vehiculos.clientes_rutCliente";
-        rs = instruct.executeQuery(query);
-        return rs;
-    }
 }

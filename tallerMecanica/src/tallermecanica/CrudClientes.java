@@ -5,6 +5,7 @@
  */
 package tallermecanica;
 
+import tallermecanica.Models.ClienteModel;
 import java.awt.Frame;
 import java.awt.HeadlessException;
 import java.sql.ResultSet;
@@ -21,6 +22,7 @@ import javax.swing.table.DefaultTableModel;
 public class CrudClientes extends javax.swing.JInternalFrame {
 
     DefaultTableModel dm = new DefaultTableModel();
+    ClienteModel cm = new ClienteModel();
 
     /**
      * Creates new form crudClientes
@@ -37,7 +39,7 @@ public class CrudClientes extends javax.swing.JInternalFrame {
         dm = new DefaultTableModel(titles, 0);
         try {
             Coneccion c = new Coneccion();
-            ResultSet res = c.viewClientes();
+            ResultSet res = cm.viewClientes();
             if (res.next()) {
                 res.beforeFirst(); // regresa al inicio para no perder el 1 er dato
                 while (res.next()) {
@@ -282,8 +284,14 @@ public class CrudClientes extends javax.swing.JInternalFrame {
     private void modalAgregarNuevoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modalAgregarNuevoClienteActionPerformed
         // TODO add your handling code here:
         Frame f = new Frame();
-        AgregarNuevoCliente anc = new AgregarNuevoCliente(f, true);
-        anc.setVisible(true);
+        AgregarNuevoCliente anc;
+        try {
+            anc = new AgregarNuevoCliente(f, true);
+            anc.setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CrudClientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_modalAgregarNuevoClienteActionPerformed
 
     /**
@@ -332,10 +340,11 @@ public class CrudClientes extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jmEliminarActionPerformed
-    
+
     /**
      * TODO editar clientes en crud
-     * @param evt 
+     *
+     * @param evt
      */
     private void jmEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmEditarActionPerformed
         // TODO add your handling code here:

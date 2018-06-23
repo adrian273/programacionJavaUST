@@ -5,10 +5,15 @@
  */
 package tallermecanica;
 
+import java.awt.Frame;
 import java.sql.ResultSet;
-import java.util.Vector;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import tallermecanica.Modals.AddNewVehiculoModal;
+import tallermecanica.Models.VehiculoModel;
 
 /**
  *
@@ -17,13 +22,18 @@ import javax.swing.table.DefaultTableModel;
 public class CrudAutoMovil extends javax.swing.JInternalFrame {
 
     DefaultTableModel dm;
+    private VehiculoModel vm;
 
     /**
      * Creates new form CrudAutoMovil
+     *
+     * @throws java.lang.ClassNotFoundException
      */
-    public CrudAutoMovil() {
+    public CrudAutoMovil() throws ClassNotFoundException {
         initComponents();
+        vm = new VehiculoModel();
         loadDataVehiculo();
+
     }
 
     public void loadDataVehiculo() {
@@ -31,8 +41,7 @@ public class CrudAutoMovil extends javax.swing.JInternalFrame {
         dm = new DefaultTableModel(titles, 0);
 
         try {
-            Coneccion c = new Coneccion();
-            ResultSet data = c.viewVehiculo();
+            ResultSet data = vm.viewVehiculo();
             if (data.next()) {
                 data.beforeFirst(); // regresa al inicio para no perder el 1 er dato
                 while (data.next()) {
@@ -72,7 +81,7 @@ public class CrudAutoMovil extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         dataTableVehiculos = new javax.swing.JTable();
         btnRefresh = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnAddNewVehiculo = new javax.swing.JButton();
         panelDatosVehiculo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -123,7 +132,12 @@ public class CrudAutoMovil extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setText("Agregar Nuevo");
+        btnAddNewVehiculo.setText("Agregar Nuevo");
+        btnAddNewVehiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddNewVehiculoActionPerformed(evt);
+            }
+        });
 
         panelDatosVehiculo.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos Vehiculos"));
 
@@ -232,7 +246,7 @@ public class CrudAutoMovil extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnRefresh)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(btnAddNewVehiculo)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
@@ -250,7 +264,7 @@ public class CrudAutoMovil extends javax.swing.JInternalFrame {
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRefresh)
-                    .addComponent(jButton2))
+                    .addComponent(btnAddNewVehiculo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -260,7 +274,7 @@ public class CrudAutoMovil extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(47, 47, 47)
                         .addComponent(panelPatente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -272,11 +286,24 @@ public class CrudAutoMovil extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(null, "Tabla Actualizada!", "success", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnRefreshActionPerformed
 
+    private void btnAddNewVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewVehiculoActionPerformed
+        // TODO add your handling code here:
+        try {
+            Frame f = new Frame();
+            AddNewVehiculoModal av;
+            av = new AddNewVehiculoModal(f, true);
+            av.setVisible(true);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(CrudAutoMovil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_btnAddNewVehiculoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddNewVehiculo;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JTable dataTableVehiculos;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;

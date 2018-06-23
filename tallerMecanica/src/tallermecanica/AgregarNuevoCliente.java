@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import tallermecanica.Models.ClienteModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -19,13 +20,15 @@ import javax.swing.JOptionPane;
  * @author adrian
  */
 public class AgregarNuevoCliente extends javax.swing.JDialog {
-
+    
+    private ClienteModel cm;
     /**
      * Creates new form AgregarNuevoCliente
      */
-    public AgregarNuevoCliente(java.awt.Frame parent, boolean modal) {
+    public AgregarNuevoCliente(java.awt.Frame parent, boolean modal) throws ClassNotFoundException {
         super(parent, modal);
         initComponents();
+        cm = new ClienteModel();
     }
 
     /**
@@ -168,13 +171,12 @@ public class AgregarNuevoCliente extends javax.swing.JDialog {
         try {
             Date date = new Date();
             DateFormat df = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
-            Coneccion c = new Coneccion();
             String rut = this.jtRut.getText();
             String nombre = this.jtNombres.getText();
             String apellidos = this.jtApellidos.getText();
             String email = this.jtEmail.getText();
             String fono = this.jtTelefono.getText();
-            ResultSet rs = c.verificarRutExistente(rut);
+            ResultSet rs = cm.verificarRutExistente(rut);
 
             if (rut.equals("")) {
                 JOptionPane.showMessageDialog(null, "Rut Requerido", "Error", JOptionPane.ERROR_MESSAGE);
@@ -200,7 +202,7 @@ public class AgregarNuevoCliente extends javax.swing.JDialog {
                             + this.jtEmail.getText() + " ',' "
                             + this.jtTelefono.getText() + "' ,'"
                             + df.format(date) + "');";
-                    c.actionRecord(query);
+                    cm.addNewClient(query);
                     JOptionPane.showMessageDialog(null, "Agregado Correctamente", "Success", JOptionPane.INFORMATION_MESSAGE);
                     this.jtRut.setText("");
                     this.jtNombres.setText("");
@@ -213,8 +215,6 @@ public class AgregarNuevoCliente extends javax.swing.JDialog {
                 this.jtRut.requestFocus();
             }
 
-        } catch (ClassNotFoundException e) {
-            JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(AgregarNuevoCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -250,7 +250,12 @@ public class AgregarNuevoCliente extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                AgregarNuevoCliente dialog = new AgregarNuevoCliente(new javax.swing.JFrame(), true);
+                AgregarNuevoCliente dialog = null;
+                try {
+                    dialog = new AgregarNuevoCliente(new javax.swing.JFrame(), true);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(AgregarNuevoCliente.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

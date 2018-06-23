@@ -101,9 +101,7 @@ public class AplicationGUI extends javax.swing.JFrame {
             cc = new CrudClientes();
             this.jDesktopPane1.add(cc);
             cc.setVisible(true);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AplicationGUI.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(AplicationGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -111,9 +109,16 @@ public class AplicationGUI extends javax.swing.JFrame {
 
     private void mainCrudVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainCrudVehiculoActionPerformed
         // TODO add your handling code here:
-        CrudAutoMovil ca = new CrudAutoMovil();
-        this.jDesktopPane1.add(ca);
-        ca.setVisible(true);
+        CrudAutoMovil ca;
+        try {
+            ca = new CrudAutoMovil();
+            this.jDesktopPane1.add(ca);
+            ca.setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AplicationGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
     }//GEN-LAST:event_mainCrudVehiculoActionPerformed
 
     /**
@@ -144,10 +149,8 @@ public class AplicationGUI extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AplicationGUI().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new AplicationGUI().setVisible(true);
         });
     }
 
