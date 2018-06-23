@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import tallermecanica.Models.ClienteModel;
 import tallermecanica.Models.VehiculoModel;
 
 /**
@@ -14,6 +15,7 @@ import tallermecanica.Models.VehiculoModel;
 public class AddNewVehiculoModal extends javax.swing.JDialog {
 
     private VehiculoModel vm;
+    private ClienteModel cm;
 
     /**
      * Creates new form AddNewVehiculoModal hijo de puta soy el wanakin, el
@@ -23,6 +25,7 @@ public class AddNewVehiculoModal extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         vm = new VehiculoModel();
+        cm = new ClienteModel();
         loadComboBoxMarca();
     }
 
@@ -70,6 +73,14 @@ public class AddNewVehiculoModal extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         jtRut = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jlNombre = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jlApellido = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jlEmail = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jlTelefono = new javax.swing.JLabel();
         btnVerificarCliente = new javax.swing.JButton();
         btnAddNew = new javax.swing.JButton();
 
@@ -94,15 +105,66 @@ public class AddNewVehiculoModal extends javax.swing.JDialog {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos Cliente"));
 
+        jLabel7.setText("Nombre");
+
+        jlNombre.setText("[                                 ]");
+
+        jLabel8.setText("Apellido");
+
+        jlApellido.setText("[                                 ]");
+
+        jLabel10.setText("Email");
+
+        jlEmail.setText("[                                 ]");
+
+        jLabel12.setText("Telefono");
+
+        jlTelefono.setText("[                                   ]");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 334, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jlTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel8)
+                                .addComponent(jLabel7))
+                            .addComponent(jLabel10))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jlNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jlApellido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jlEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(208, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 271, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jlNombre))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jlApellido))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jlEmail))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(jlTelefono))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
 
         btnVerificarCliente.setText("Verificar Cliente");
@@ -113,6 +175,11 @@ public class AddNewVehiculoModal extends javax.swing.JDialog {
         });
 
         btnAddNew.setText("Agregar");
+        btnAddNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddNewActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -205,11 +272,80 @@ public class AddNewVehiculoModal extends javax.swing.JDialog {
         // TODO add your handling code here:
         String rut = this.jtRut.getText();
         if (!rut.equals("")) {
-            
+            try {
+
+                ResultSet rs = cm.verificarRutExistente(rut);
+                if (rs.next()) {
+                    rs.beforeFirst();
+                    while (rs.next()) {
+                        this.jlNombre.setText(rs.getString("nombresCliente"));
+                        this.jlApellido.setText(rs.getString("apellidosCliente"));
+                        this.jlEmail.setText(rs.getString("emailCliente"));
+                        this.jlTelefono.setText(rs.getString("fonoCliente"));
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Rut No registrados", "Error", JOptionPane.WARNING_MESSAGE);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(AddNewVehiculoModal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         } else {
             JOptionPane.showMessageDialog(null, "Rut Requerido!", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnVerificarClienteActionPerformed
+    
+    /**
+     * TODO Agregar un nuevo automovil al sistema
+     * @param evt 
+     */
+    private void btnAddNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewActionPerformed
+        // TODO add your handling code here:
+        String patente = this.jtPatente.getText();
+        String marcas = (String) this.jcMarca.getSelectedItem();
+        String modelo = this.jtModelo.getText();
+        String color = this.jtColor.getText();
+        String year = this.jtYear.getText();
+        String rut = this.jtRut.getText();
+        if (patente.equals("")) {
+            JOptionPane.showMessageDialog(null, "Patente Requerida!", "Error", JOptionPane.ERROR_MESSAGE);
+            this.jtPatente.requestFocus();
+        } else if (marcas.equals("")) {
+            JOptionPane.showMessageDialog(null, "Marca Requerida!", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (modelo.equals("")) {
+            JOptionPane.showMessageDialog(null, "Modelo Requerido!", "Error", JOptionPane.ERROR_MESSAGE);
+            this.jtModelo.requestFocus();
+        } else if (color.equals("")) {
+            JOptionPane.showMessageDialog(null, "Color Requerido!", "Error", JOptionPane.ERROR_MESSAGE);
+            this.jtColor.requestFocus();
+        } else if (year.equals("")) {
+            JOptionPane.showMessageDialog(null, "Año Requerido!", "Error", JOptionPane.ERROR_MESSAGE);
+            this.jtYear.requestFocus();
+        } else if (rut.equals("")) {
+            JOptionPane.showMessageDialog(null, "Rut Requerido!", "Error", JOptionPane.ERROR_MESSAGE);
+            this.jtRut.requestFocus();
+        }
+        try {
+            ResultSet rutVeri = cm.verificarRutExistente(rut);
+            if (rutVeri.next()) {
+                rutVeri.beforeFirst();
+                vm.addNewVehiculo(patente, marcas, modelo, color, Integer.parseInt(year), rut);
+                JOptionPane.showMessageDialog(null, "agregado Correctamente", "Success", JOptionPane.INFORMATION_MESSAGE);
+                this.jtPatente.setText("");
+                this.jcMarca.setSelectedIndex(0);
+                this.jtModelo.setText("");
+                this.jtColor.setText("");
+                this.jtYear.setText("");
+                this.jtRut.setText("");
+            } else {
+                JOptionPane.showMessageDialog(null, "Rut No encontrado!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (NullPointerException e) {
+
+        }
+    }//GEN-LAST:event_btnAddNewActionPerformed
 
     /**
      * @param args the command line arguments
@@ -247,7 +383,7 @@ public class AddNewVehiculoModal extends javax.swing.JDialog {
                 Logger.getLogger(AddNewVehiculoModal.class.getName()).log(Level.SEVERE, null, ex);
             }
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                
+
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
                     System.exit(0);
@@ -261,14 +397,22 @@ public class AddNewVehiculoModal extends javax.swing.JDialog {
     private javax.swing.JButton btnAddNew;
     private javax.swing.JButton btnVerificarCliente;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JComboBox<String> jcMarca;
+    private javax.swing.JLabel jlApellido;
+    private javax.swing.JLabel jlEmail;
+    private javax.swing.JLabel jlNombre;
+    private javax.swing.JLabel jlTelefono;
     private javax.swing.JTextField jtColor;
     private javax.swing.JTextField jtModelo;
     private javax.swing.JTextField jtPatente;

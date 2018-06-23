@@ -3,6 +3,9 @@ package tallermecanica.Models;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import tallermecanica.Coneccion;
 
 /**
@@ -21,7 +24,18 @@ public class VehiculoModel {
     /**
         TODO agregar nuevo vehiculo
     */
-    public void addNewVehiculo(String query) {
+    public void addNewVehiculo(String patente, String marcas, String modelo, String color, int year, String rut) {
+        Date d = new Date();
+        DateFormat df = new SimpleDateFormat("yy-MM-dd");
+        String query = "INSERT INTO vehiculos (patenteVehiculo, marcas_idMarca, modelo, color, yearVehiculo, fechaRegistroVehiculo, clientes_rutCliente)"
+                + "VALUES ('"
+                + patente + "','"
+                + 1 + "', '"
+                + modelo + "', '"
+                + color + "','"
+                + year + "', '"
+                + df.format(d) + "', '"
+                + rut + "'); ";
         c.actionRecord(query);
     }
     

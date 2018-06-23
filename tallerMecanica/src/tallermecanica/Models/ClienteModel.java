@@ -39,7 +39,7 @@ public class ClienteModel {
      * @return rut cliente si es que existe en la base de datos
      */
     public ResultSet verificarRutExistente(String rut) throws SQLException {
-        String query = "SELECT rutCliente FROM clientes WHERE rutCliente = '"
+        String query = "SELECT * FROM clientes WHERE rutCliente = '"
                 + rut + " ';";
         rs = c.getInstruct().executeQuery(query);
         return rs;
