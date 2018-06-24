@@ -36,7 +36,7 @@ public class AplicationGUI extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         mainClientes = new javax.swing.JMenuItem();
         mainCrudVehiculo = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        mainCrudRegistro = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,6 +52,11 @@ public class AplicationGUI extends javax.swing.JFrame {
         );
 
         jMenu1.setText("Archivo");
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu1ActionPerformed(evt);
+            }
+        });
 
         mainClientes.setText("Clientes");
         mainClientes.addActionListener(new java.awt.event.ActionListener() {
@@ -69,8 +74,13 @@ public class AplicationGUI extends javax.swing.JFrame {
         });
         jMenu1.add(mainCrudVehiculo);
 
-        jMenuItem3.setText("Registros");
-        jMenu1.add(jMenuItem3);
+        mainCrudRegistro.setText("Registros");
+        mainCrudRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mainCrudRegistroActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mainCrudRegistro);
 
         jMenuBar1.add(jMenu1);
 
@@ -123,6 +133,17 @@ public class AplicationGUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_mainCrudVehiculoActionPerformed
 
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu1ActionPerformed
+
+    private void mainCrudRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainCrudRegistroActionPerformed
+        // TODO add your handling code here:
+        CrudRegistro cr = new CrudRegistro();
+        this.jDesktopPane1.add(cr);
+        cr.setVisible(true);
+    }//GEN-LAST:event_mainCrudRegistroActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -160,8 +181,8 @@ public class AplicationGUI extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem mainClientes;
+    private javax.swing.JMenuItem mainCrudRegistro;
     private javax.swing.JMenuItem mainCrudVehiculo;
     // End of variables declaration//GEN-END:variables
 }
