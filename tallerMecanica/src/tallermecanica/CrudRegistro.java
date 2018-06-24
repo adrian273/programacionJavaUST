@@ -1,13 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tallermecanica;
 
+import java.awt.Frame;
+import java.awt.HeadlessException;
 import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import tallermecanica.Modals.AddNewRegistroModal;
 import tallermecanica.Models.RegistroModel;
 
 /**
@@ -29,6 +29,9 @@ public class CrudRegistro extends javax.swing.JInternalFrame {
         loadDataRegistro();
     }
 
+    /**
+     * TODO cargar datos de los registros en la tabla
+     */
     public void loadDataRegistro() {
         String titles[] = {"Numero Registro", "Fecha", "Descripcion", "Patente", "Cliente", "Total"};
         dm = new DefaultTableModel(titles, 0);
@@ -40,7 +43,7 @@ public class CrudRegistro extends javax.swing.JInternalFrame {
                     String nRegistro = vData.getString("idRegistro");
                     String fecha = vData.getString("fechaRegistro");
                     String descripcion = vData.getString("descripcionRegistro");
-                    
+
                     String patente = vData.getString("patenteVehiculo");
                     String nCliente = vData.getString("nombresCliente") + " " + vData.getString("apellidosCliente");
                     String total = vData.getString("totalCobroRegistro");
@@ -65,10 +68,24 @@ public class CrudRegistro extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        mainRegistroTable = new javax.swing.JPopupMenu();
+        jmEliminar = new javax.swing.JMenuItem();
+        jmEditar = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         dataTableRegistro = new javax.swing.JTable();
         btnRefresh = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnAddNewRegistro = new javax.swing.JButton();
+
+        jmEliminar.setText("Eliminar");
+        jmEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmEliminarActionPerformed(evt);
+            }
+        });
+        mainRegistroTable.add(jmEliminar);
+
+        jmEditar.setText("Editar");
+        mainRegistroTable.add(jmEditar);
 
         setClosable(true);
         setIconifiable(true);
@@ -88,11 +105,22 @@ public class CrudRegistro extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        dataTableRegistro.setComponentPopupMenu(mainRegistroTable);
         jScrollPane1.setViewportView(dataTableRegistro);
 
         btnRefresh.setText("Refrescar");
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Agregar Nuevo Registro");
+        btnAddNewRegistro.setText("Agregar Nuevo Registro");
+        btnAddNewRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddNewRegistroActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -106,7 +134,7 @@ public class CrudRegistro extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnRefresh)
                 .addGap(29, 29, 29)
-                .addComponent(jButton2)
+                .addComponent(btnAddNewRegistro)
                 .addGap(135, 135, 135))
         );
         layout.setVerticalGroup(
@@ -115,7 +143,7 @@ public class CrudRegistro extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRefresh)
-                    .addComponent(jButton2))
+                    .addComponent(btnAddNewRegistro))
                 .addGap(17, 17, 17)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(275, Short.MAX_VALUE))
@@ -124,11 +152,47 @@ public class CrudRegistro extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * TODO refrescar datos de la tabla
+     *
+     * @param evt
+     */
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        // TODO add your handling code here:
+        loadDataRegistro();
+        JOptionPane.showMessageDialog(null, "Tabla refrescada!", "Info", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnRefreshActionPerformed
+
+    /**
+     * TODO llamar el modal para agregar el nuevo modal
+     *
+     * @param evt
+     */
+    private void btnAddNewRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewRegistroActionPerformed
+        // TODO add your handling code here:
+        try {
+            Frame f = new Frame();
+            AddNewRegistroModal rm = new AddNewRegistroModal(f, true);
+            rm.setVisible(true);
+        } catch (HeadlessException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CrudRegistro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnAddNewRegistroActionPerformed
+    
+    private void jmEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmEliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jmEliminarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddNewRegistro;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JTable dataTableRegistro;
-    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JMenuItem jmEditar;
+    private javax.swing.JMenuItem jmEliminar;
+    private javax.swing.JPopupMenu mainRegistroTable;
     // End of variables declaration//GEN-END:variables
 }
