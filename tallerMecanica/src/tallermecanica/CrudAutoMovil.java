@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import tallermecanica.Modals.AddNewVehiculoModal;
+import tallermecanica.Models.ClienteModel;
 import tallermecanica.Models.VehiculoModel;
 
 /**
@@ -23,17 +24,19 @@ public class CrudAutoMovil extends javax.swing.JInternalFrame {
 
     DefaultTableModel dm;
     private VehiculoModel vm;
+    private ClienteModel cm;
 
     /**
      * Creates new form CrudAutoMovil
      *
      * @throws java.lang.ClassNotFoundException
      */
-    public CrudAutoMovil() throws ClassNotFoundException {
+    public CrudAutoMovil() throws ClassNotFoundException, SQLException {
         initComponents();
         vm = new VehiculoModel();
+        cm = new ClienteModel();
         loadDataVehiculo();
-
+        cargarCBMarca();
     }
 
     public void loadDataVehiculo() {
@@ -85,17 +88,18 @@ public class CrudAutoMovil extends javax.swing.JInternalFrame {
         panelDatosVehiculo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jtModelo = new javax.swing.JTextField();
+        jcMarca = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        jtColor = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        jtYear = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        jtRutCliente = new javax.swing.JTextField();
+        btnActualizar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         panelPatente = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
+        jlPatente = new javax.swing.JLabel();
 
         jmEliminar.setText("Eliminar");
         jmEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -106,6 +110,11 @@ public class CrudAutoMovil extends javax.swing.JInternalFrame {
         mainCrudVehiculo.add(jmEliminar);
 
         jmEditar.setText("Editar");
+        jmEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmEditarActionPerformed(evt);
+            }
+        });
         mainCrudVehiculo.add(jmEditar);
 
         setClosable(true);
@@ -150,7 +159,7 @@ public class CrudAutoMovil extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Modelo");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcMarca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
 
         jLabel4.setText("color");
 
@@ -158,7 +167,19 @@ public class CrudAutoMovil extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Rut Cliente");
 
-        jButton3.setText("Actualizar");
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Verificar Cliente");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelDatosVehiculoLayout = new javax.swing.GroupLayout(panelDatosVehiculo);
         panelDatosVehiculo.setLayout(panelDatosVehiculoLayout);
@@ -179,22 +200,23 @@ public class CrudAutoMovil extends javax.swing.JInternalFrame {
                 .addGroup(panelDatosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelDatosVehiculoLayout.createSequentialGroup()
                         .addGroup(panelDatosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField4)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(42, 42, 42)
-                        .addGroup(panelDatosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4))
-                        .addGap(18, 18, 18)
+                            .addGroup(panelDatosVehiculoLayout.createSequentialGroup()
+                                .addGroup(panelDatosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtYear)
+                                    .addComponent(jcMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(42, 42, 42)
+                                .addGroup(panelDatosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel4))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jtRutCliente))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panelDatosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField2)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)))
-                    .addComponent(jTextField1))
+                            .addComponent(jtModelo)
+                            .addComponent(jtColor, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(btnActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(348, 348, 348))
-            .addGroup(panelDatosVehiculoLayout.createSequentialGroup()
-                .addGap(296, 296, 296)
-                .addComponent(jButton3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelDatosVehiculoLayout.setVerticalGroup(
             panelDatosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,29 +224,30 @@ public class CrudAutoMovil extends javax.swing.JInternalFrame {
                 .addGap(17, 17, 17)
                 .addGroup(panelDatosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addGroup(panelDatosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addGap(32, 32, 32)
+                .addGap(28, 28, 28)
                 .addGroup(panelDatosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addComponent(jButton3)
+                    .addComponent(jtRutCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGap(24, 24, 24)
+                .addComponent(btnActualizar)
                 .addContainerGap(43, Short.MAX_VALUE))
         );
 
         panelPatente.setBorder(javax.swing.BorderFactory.createTitledBorder("Patente"));
         panelPatente.setToolTipText("");
 
-        jLabel6.setFont(new java.awt.Font("Dialog", 1, 60)); // NOI18N
-        jLabel6.setText("000000");
+        jlPatente.setFont(new java.awt.Font("Dialog", 1, 60)); // NOI18N
+        jlPatente.setText("000000");
 
         javax.swing.GroupLayout panelPatenteLayout = new javax.swing.GroupLayout(panelPatente);
         panelPatente.setLayout(panelPatenteLayout);
@@ -232,14 +255,14 @@ public class CrudAutoMovil extends javax.swing.JInternalFrame {
             panelPatenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPatenteLayout.createSequentialGroup()
                 .addGap(130, 130, 130)
-                .addComponent(jLabel6)
+                .addComponent(jlPatente)
                 .addContainerGap(135, Short.MAX_VALUE))
         );
         panelPatenteLayout.setVerticalGroup(
             panelPatenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPatenteLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
-                .addComponent(jLabel6)
+                .addComponent(jlPatente)
                 .addContainerGap(52, Short.MAX_VALUE))
         );
 
@@ -261,7 +284,7 @@ public class CrudAutoMovil extends javax.swing.JInternalFrame {
                         .addComponent(panelDatosVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
                         .addComponent(panelPatente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(39, Short.MAX_VALUE))))
+                        .addContainerGap(33, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -326,26 +349,120 @@ public class CrudAutoMovil extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jmEliminarActionPerformed
 
+    /**
+     * TODO actualizar registro del vehiculo
+     *
+     * @param evt
+     */
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        // TODO add your handling code here:
+        String patente = this.jlPatente.getText();
+        int marca = 2; // de momento =)
+        String modelo = this.jtModelo.getText();
+        String color = this.jtColor.getText();
+        String year = this.jtYear.getText();
+        String rut = this.jtRutCliente.getText();
+        if (modelo.equals("")) {
+            JOptionPane.showMessageDialog(null, "Modelo Requerido!", "Error", JOptionPane.ERROR_MESSAGE);
+            this.jtModelo.requestFocus();
+        } else if (color.equals("")) {
+            JOptionPane.showMessageDialog(null, "Color Requerido!", "Error", JOptionPane.ERROR_MESSAGE);
+            this.jtColor.requestFocus();
+        } else if (year.equals("")) {
+            JOptionPane.showMessageDialog(null, "Año Requerido!", "Error", JOptionPane.ERROR_MESSAGE);
+            this.jtYear.requestFocus();
+        } else if (rut.equals("")) {
+            JOptionPane.showMessageDialog(null, "Modelo Requerido!", "Error", JOptionPane.ERROR_MESSAGE);
+            this.jtRutCliente.requestFocus();
+        } else {
+            try {
+                ResultSet vRut;
+                vRut = cm.verificarRutExistente(rut);
+                if (vRut.next()) {
+                    vRut.beforeFirst();
+                    vm.updateVehiculo(patente, marca, modelo, color, Integer.parseInt(year), rut);
+                    JOptionPane.showMessageDialog(null, "Actualizados Correctamente", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    loadDataVehiculo();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Rut No Registrado!", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(CrudAutoMovil.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    /**
+     * TODO para cargar la informacion en los cajones de texto de edicion
+     *
+     * @param evt
+     */
+    private void jmEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmEditarActionPerformed
+        // TODO add your handling code here:
+        int registro = this.dataTableVehiculos.getSelectedRow();
+        String patente = (String) this.dataTableVehiculos.getValueAt(registro, 0);
+        try {
+            ResultSet vData = vm.viewDataVehiculo(patente);
+            if (vData.next()) {
+                vData.beforeFirst();
+                while (vData.next()) {
+                    this.jlPatente.setText(vData.getString("patenteVehiculo"));
+                    this.jtModelo.setText(vData.getString("modelo"));
+                    this.jtColor.setText(vData.getString("color"));
+                    this.jtYear.setText(vData.getString("yearVehiculo"));
+                    this.jtRutCliente.setText(vData.getString("clientes_rutCliente"));
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CrudAutoMovil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jmEditarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    /**
+     * TODO cargar la marca de los vehiculos en combobox
+     *
+     * @throws SQLException
+     */
+    public void cargarCBMarca() throws SQLException {
+        try {
+            ResultSet vMarca = vm.viewMarca();
+            if (vMarca.next()) {
+                vMarca.beforeFirst();
+                while (vMarca.next()) {
+                    this.jcMarca.addItem(vMarca.getString("nombreMarca"));
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "No hay registro de marca", "Warning!", JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnAddNewVehiculo;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JTable dataTableVehiculos;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JComboBox<String> jcMarca;
+    private javax.swing.JLabel jlPatente;
     private javax.swing.JMenuItem jmEditar;
     private javax.swing.JMenuItem jmEliminar;
+    private javax.swing.JTextField jtColor;
+    private javax.swing.JTextField jtModelo;
+    private javax.swing.JTextField jtRutCliente;
+    private javax.swing.JTextField jtYear;
     private javax.swing.JPopupMenu mainCrudVehiculo;
     private javax.swing.JPanel panelDatosVehiculo;
     private javax.swing.JPanel panelPatente;

@@ -100,4 +100,38 @@ public class VehiculoModel {
         c.actionRecord(query);
     }
     
+    /**
+     * 
+     * @param p patente
+     * @return datos del automovil dependiendo de su patente
+     * @throws java.sql.SQLException
+     */
+    public ResultSet viewDataVehiculo(String p) throws SQLException {
+        String query = "SELECT * FROM vehiculos WHERE patenteVehiculo = '"
+                + p + "';";
+        rs = c.getInstruct().executeQuery(query);
+        return rs;
+    }
+    
+    /**
+     * 
+     * @param pa patente
+     * @param idMarca [por resolverlo]
+     * @param modelo
+     * @param color
+     * @param year
+     * @param rut
+     */
+    public void updateVehiculo(String pa, int idMarca, String modelo, String color, int year, String rut) {
+        String query;
+        query = "UPDATE vehiculos SET modelo = '"
+                + modelo + "',color= '"
+                + color + "', yearVehiculo= '"
+                + year + "', clientes_rutCliente= '"
+                + rut + "' "
+                + "WHERE patenteVehiculo = '"
+                + pa + "';";
+        c.actionRecord(query);
+    }
+    
 }
