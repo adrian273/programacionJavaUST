@@ -51,5 +51,15 @@ public class RegistroModel {
         c.actionRecord(query);
     }
     
+    /**
+     * 
+     * @param ident identificador del tegostro seleccionado a borrar
+     */
+    public void deleteRegistro(int ident) {
+        String query = "DELETE FROM registros"
+                + " WHERE idRegistro = "
+                + ident +";";
+        c.actionRecord(query);
+    }
     
 }

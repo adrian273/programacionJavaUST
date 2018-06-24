@@ -12,7 +12,7 @@ import tallermecanica.Models.RegistroModel;
 
 /**
  *
- * @author adrian
+ * @author adrian verdugo
  */
 public class CrudRegistro extends javax.swing.JInternalFrame {
 
@@ -180,9 +180,31 @@ public class CrudRegistro extends javax.swing.JInternalFrame {
             Logger.getLogger(CrudRegistro.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnAddNewRegistroActionPerformed
-    
+
+    /**
+     * Eliminar Registro Seleccionado
+     * @param evt
+     */
     private void jmEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmEliminarActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here
+        try {
+            int registro = this.dataTableRegistro.getSelectedRow();
+            String ident = (String) this.dataTableRegistro.getValueAt(registro, 0);
+            int confirmar = JOptionPane.showConfirmDialog(null, "¿Estas seguro de eliminar este registro?", "Warnig", JOptionPane.WARNING_MESSAGE);
+            if (JOptionPane.OK_OPTION == confirmar) {
+                try {
+                    rm.deleteRegistro(Integer.parseInt(ident));
+                    JOptionPane.showMessageDialog(null, "Eliminado correctamente", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    loadDataRegistro();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        } catch (HeadlessException | NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (ArrayIndexOutOfBoundsException a) {
+            JOptionPane.showMessageDialog(null, "Seleccione una fila", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jmEliminarActionPerformed
 
 
