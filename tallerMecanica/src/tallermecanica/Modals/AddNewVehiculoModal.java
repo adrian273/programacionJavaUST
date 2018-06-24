@@ -294,10 +294,11 @@ public class AddNewVehiculoModal extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Rut Requerido!", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnVerificarClienteActionPerformed
-    
+
     /**
      * TODO Agregar un nuevo automovil al sistema
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnAddNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewActionPerformed
         // TODO add your handling code here:
@@ -329,14 +330,19 @@ public class AddNewVehiculoModal extends javax.swing.JDialog {
             ResultSet rutVeri = cm.verificarRutExistente(rut);
             if (rutVeri.next()) {
                 rutVeri.beforeFirst();
-                vm.addNewVehiculo(patente, marcas, modelo, color, Integer.parseInt(year), rut);
-                JOptionPane.showMessageDialog(null, "agregado Correctamente", "Success", JOptionPane.INFORMATION_MESSAGE);
-                this.jtPatente.setText("");
-                this.jcMarca.setSelectedIndex(0);
-                this.jtModelo.setText("");
-                this.jtColor.setText("");
-                this.jtYear.setText("");
-                this.jtRut.setText("");
+                if (!vm.verificPatente(patente)) {
+                    vm.addNewVehiculo(patente, marcas, modelo, color, Integer.parseInt(year), rut);
+                    JOptionPane.showMessageDialog(null, "agregado Correctamente", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    this.jtPatente.setText("");
+                    this.jcMarca.setSelectedIndex(0);
+                    this.jtModelo.setText("");
+                    this.jtColor.setText("");
+                    this.jtYear.setText("");
+                    this.jtRut.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Patente ya registrada!", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+
             } else {
                 JOptionPane.showMessageDialog(null, "Rut No encontrado!", "Error", JOptionPane.ERROR_MESSAGE);
             }

@@ -22,8 +22,15 @@ public class VehiculoModel {
     }
     
     /**
-        TODO agregar nuevo vehiculo
-    */
+     * 
+     * @param patente
+     * @param marcas
+     * @param modelo
+     * @param color
+     * @param year
+     * @param rut
+     * TODO Agregar nuevos vehiculos al sistema
+     */
     public void addNewVehiculo(String patente, String marcas, String modelo, String color, int year, String rut) {
         Date d = new Date();
         DateFormat df = new SimpleDateFormat("yy-MM-dd");
@@ -41,6 +48,8 @@ public class VehiculoModel {
     
     /**
      * TODO obtener los registros de las marcas de los automoviles
+     * @return marcas
+     * @throws java.sql.SQLException
      */
     public ResultSet viewMarca() throws SQLException {
         String query = "SELECT * FROM marcas";
@@ -59,6 +68,24 @@ public class VehiculoModel {
                 + "AND clientes.rutCliente = vehiculos.clientes_rutCliente";
         rs = c.getInstruct().executeQuery(query);
         return rs;
+    }
+    
+    /**
+     * 
+     * @param patente del vehiculo
+     * @return false si no esta la patente;;
+     * @throws SQLException 
+     */
+    public boolean verificPatente(String patente) throws SQLException {
+        String query = "SELECT patenteVehiculo FROM vehiculos "
+                + "WHERE patenteVehiculo = '"
+                + patente + "';";
+        rs = c.getInstruct().executeQuery(query);
+        if(rs.next()) {
+            rs.beforeFirst();
+            return true;
+        }
+        return false;
     }
     
 }
