@@ -10,7 +10,8 @@ import tallermecanica.Coneccion;
 
 /**
  *
- * @author adrian
+ * @author adrian verdugo
+ * @since 23-06-2018
  */
 public class VehiculoModel {
     
@@ -86,6 +87,17 @@ public class VehiculoModel {
             return true;
         }
         return false;
+    }
+    
+    /**
+     * 
+     * @param patente 
+     */
+    public void deleteVehiculo(String patente) {
+        String query;
+        query = "DELETE FROM vehiculos WHERE patenteVehiculo = '"
+                + patente +"';";
+        c.actionRecord(query);
     }
     
 }

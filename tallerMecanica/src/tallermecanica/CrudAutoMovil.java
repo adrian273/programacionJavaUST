@@ -98,6 +98,11 @@ public class CrudAutoMovil extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
 
         jmEliminar.setText("Eliminar");
+        jmEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmEliminarActionPerformed(evt);
+            }
+        });
         mainCrudVehiculo.add(jmEliminar);
 
         jmEditar.setText("Editar");
@@ -298,6 +303,28 @@ public class CrudAutoMovil extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_btnAddNewVehiculoActionPerformed
+
+    /**
+     * TODO Eliminar vehiculo
+     *
+     * @param evt
+     */
+    private void jmEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmEliminarActionPerformed
+        // TODO add your handling code here:
+        try {
+            int reg = this.dataTableVehiculos.getSelectedRow();
+            String patente = (String) this.dataTableVehiculos.getValueAt(reg, 0);
+            int confirm = JOptionPane.showConfirmDialog(null, "¿Estas seguro de eliminarlo?", "Warning", JOptionPane.WARNING_MESSAGE);
+            if (JOptionPane.OK_OPTION == confirm) {
+                vm.deleteVehiculo(patente);
+                JOptionPane.showMessageDialog(null, "Eliminado con exito!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                loadDataVehiculo();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_jmEliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
