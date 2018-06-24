@@ -116,6 +116,8 @@ public class AplicationGUI extends javax.swing.JFrame {
             ca.setVisible(true);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AplicationGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(AplicationGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
 
 

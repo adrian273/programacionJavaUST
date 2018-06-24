@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import tallermecanica.Modals.AddNewVehiculoModal;
+import tallermecanica.Modals.InformacionClienteModal;
 import tallermecanica.Models.ClienteModel;
 import tallermecanica.Models.VehiculoModel;
 
@@ -97,7 +98,7 @@ public class CrudAutoMovil extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jtRutCliente = new javax.swing.JTextField();
         btnActualizar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnVerificarCliente = new javax.swing.JButton();
         panelPatente = new javax.swing.JPanel();
         jlPatente = new javax.swing.JLabel();
 
@@ -174,10 +175,10 @@ public class CrudAutoMovil extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setText("Verificar Cliente");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnVerificarCliente.setText("Verificar Cliente");
+        btnVerificarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnVerificarClienteActionPerformed(evt);
             }
         });
 
@@ -214,7 +215,7 @@ public class CrudAutoMovil extends javax.swing.JInternalFrame {
                         .addGroup(panelDatosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jtModelo)
                             .addComponent(jtColor, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(btnVerificarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(btnActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(348, 348, 348))
         );
@@ -237,7 +238,7 @@ public class CrudAutoMovil extends javax.swing.JInternalFrame {
                 .addGroup(panelDatosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jtRutCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(btnVerificarCliente))
                 .addGap(24, 24, 24)
                 .addComponent(btnActualizar)
                 .addContainerGap(43, Short.MAX_VALUE))
@@ -376,15 +377,18 @@ public class CrudAutoMovil extends javax.swing.JInternalFrame {
             this.jtRutCliente.requestFocus();
         } else {
             try {
-                ResultSet vRut;
-                vRut = cm.verificarRutExistente(rut);
-                if (vRut.next()) {
-                    vRut.beforeFirst();
-                    vm.updateVehiculo(patente, marca, modelo, color, Integer.parseInt(year), rut);
-                    JOptionPane.showMessageDialog(null, "Actualizados Correctamente", "Success", JOptionPane.INFORMATION_MESSAGE);
-                    loadDataVehiculo();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Rut No Registrado!", "Error", JOptionPane.ERROR_MESSAGE);
+                int confirm = JOptionPane.showConfirmDialog(null, "¿Confirmar Cambios?", "Warning", JOptionPane.WARNING_MESSAGE);
+                if (JOptionPane.OK_OPTION == confirm) {
+                    ResultSet vRut;
+                    vRut = cm.verificarRutExistente(rut);
+                    if (vRut.next()) {
+                        vRut.beforeFirst();
+                        vm.updateVehiculo(patente, marca, modelo, color, Integer.parseInt(year), rut);
+                        JOptionPane.showMessageDialog(null, "Actualizados Correctamente", "Success", JOptionPane.INFORMATION_MESSAGE);
+                        loadDataVehiculo();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Rut No Registrado!", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(CrudAutoMovil.class.getName()).log(Level.SEVERE, null, ex);
@@ -418,9 +422,30 @@ public class CrudAutoMovil extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jmEditarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    /**
+     * TODO verificar la informacion del cliente agregado
+     *
+     * @param evt
+     */
+    private void btnVerificarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarClienteActionPerformed
+        String rut = this.jtRutCliente.getText();
+        if (!rut.equals("")) {
+            Frame frame = new Frame();
+            InformacionClienteModal ic;
+            try {
+                ic = new InformacionClienteModal(frame, true, rut);
+                ic.setVisible(true);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(CrudAutoMovil.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(CrudAutoMovil.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Rut Requerido!", "Error", JOptionPane.ERROR_MESSAGE);
+            this.jtRutCliente.requestFocus();
+        }
+    }//GEN-LAST:event_btnVerificarClienteActionPerformed
 
     /**
      * TODO cargar la marca de los vehiculos en combobox
@@ -447,8 +472,8 @@ public class CrudAutoMovil extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnAddNewVehiculo;
     private javax.swing.JButton btnRefresh;
+    private javax.swing.JButton btnVerificarCliente;
     private javax.swing.JTable dataTableVehiculos;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
