@@ -62,4 +62,32 @@ public class RegistroModel {
         c.actionRecord(query);
     }
     
+    /**
+     * TODO Devuelve el dato del registro seleccionado
+     * @param id identificador
+     * @return 
+     * @throws java.sql.SQLException 
+     */
+    public ResultSet viewRegistro(int id) throws SQLException {
+        String query = "SELECT * FROM registros, clientes, vehiculos, marcas "
+                + "WHERE patenteVehiculo = vehiculos_patenteVehiculo AND rutCliente = clientes_rutCliente AND idRegistro = "
+                + id + " AND marcas_idMarca = idMArca;";
+        ResultSet rs = c.getInstruct().executeQuery(query);
+        return rs;
+    }
+    
+    /**
+     * 
+     * @param ident
+     * @param des
+     * @param cobro 
+     */
+    public void updateRegistro(int ident, String des, int cobro) {
+        String query = "UPDATE registros SET descripcionRegistro = '"
+                + des + "', totalCobroRegistro = "
+                + cobro + " WHERE idRegistro = "
+                + ident + ";";
+        c.actionRecord(query);
+    }
+    
 }

@@ -75,6 +75,24 @@ public class CrudRegistro extends javax.swing.JInternalFrame {
         dataTableRegistro = new javax.swing.JTable();
         btnRefresh = new javax.swing.JButton();
         btnAddNewRegistro = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jtDescripcion = new javax.swing.JTextArea();
+        jLabel2 = new javax.swing.JLabel();
+        jtCosto = new javax.swing.JTextField();
+        btnActualizarRegistro = new javax.swing.JButton();
+        jlId = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jlCliente = new javax.swing.JLabel();
+        jlRut = new javax.swing.JLabel();
+        jlVehiculo = new javax.swing.JLabel();
+        jlPatente = new javax.swing.JLabel();
 
         jmEliminar.setText("Eliminar");
         jmEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -85,6 +103,11 @@ public class CrudRegistro extends javax.swing.JInternalFrame {
         mainRegistroTable.add(jmEliminar);
 
         jmEditar.setText("Editar");
+        jmEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmEditarActionPerformed(evt);
+            }
+        });
         mainRegistroTable.add(jmEditar);
 
         setClosable(true);
@@ -122,20 +145,151 @@ public class CrudRegistro extends javax.swing.JInternalFrame {
             }
         });
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos a Actulizar"));
+
+        jLabel1.setText("Descripcion");
+
+        jtDescripcion.setColumns(20);
+        jtDescripcion.setRows(5);
+        jScrollPane2.setViewportView(jtDescripcion);
+
+        jLabel2.setText("Costo $");
+
+        btnActualizarRegistro.setText("Actualizar");
+        btnActualizarRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarRegistroActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("N registro");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnActualizarRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
+                    .addComponent(jtCosto))
+                .addContainerGap(31, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel7)
+                .addGap(18, 18, 18)
+                .addComponent(jlId)
+                .addGap(123, 123, 123))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlId)
+                    .addComponent(jLabel7))
+                .addGap(3, 3, 3)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jtCosto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnActualizarRegistro)
+                .addGap(18, 18, 18))
+        );
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos Cliente - Vehiculo"));
+
+        jLabel3.setText("Cliente");
+
+        jLabel4.setText("Vehiculo");
+
+        jLabel5.setText("Patente");
+
+        jLabel6.setText("Rut");
+
+        jlCliente.setText("-------");
+
+        jlRut.setText("-------");
+
+        jlVehiculo.setText("-------");
+
+        jlPatente.setText("-------");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel6))
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlRut, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlPatente, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(69, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jlCliente))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jlRut))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jlVehiculo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jlPatente))
+                .addGap(23, 23, 23))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1216, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnRefresh)
                 .addGap(29, 29, 29)
                 .addComponent(btnAddNewRegistro)
                 .addGap(135, 135, 135))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1216, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,7 +300,15 @@ public class CrudRegistro extends javax.swing.JInternalFrame {
                     .addComponent(btnAddNewRegistro))
                 .addGap(17, 17, 17)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(275, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
@@ -183,6 +345,7 @@ public class CrudRegistro extends javax.swing.JInternalFrame {
 
     /**
      * Eliminar Registro Seleccionado
+     *
      * @param evt
      */
     private void jmEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmEliminarActionPerformed
@@ -207,14 +370,100 @@ public class CrudRegistro extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jmEliminarActionPerformed
 
+    /**
+     * TODO Cargar datos en panel de edicion de registro
+     *
+     * @param evt
+     */
+    private void jmEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmEditarActionPerformed
+        // TODO add your handling code here:
+        try {
+            int reg = this.dataTableRegistro.getSelectedRow();
+            String ident = (String) this.dataTableRegistro.getValueAt(reg, 0);
+            try {
+                ResultSet vData = rm.viewRegistro(Integer.parseInt(ident));
+                System.out.println(vData);
+                if (vData.next()) {
+                    vData.beforeFirst();
+                    while (vData.next()) {
+                        this.jtDescripcion.setText(vData.getString("descripcionRegistro"));
+                        this.jtCosto.setText(vData.getString("totalCobroRegistro"));
+                        this.jlCliente.setText(vData.getString("nombresCliente") + " " + vData.getString("apellidosCliente"));
+                        this.jlRut.setText(vData.getString("rutCliente"));
+                        this.jlVehiculo.setText(vData.getString("nombreMarca") + " " + vData.getString("modelo") + " " + vData.getString("yearVehiculo"));
+                        this.jlPatente.setText(vData.getString("patenteVehiculo"));
+                        this.jlId.setText(vData.getString("idRegistro"));
+                    }
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jmEditarActionPerformed
+
+    /**
+     * TODO Actualizar los datos de los registros en la DB
+     *
+     * @param evt
+     */
+    private void btnActualizarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarRegistroActionPerformed
+        // TODO add your handling code here:
+        try {
+            String des = this.jtDescripcion.getText();
+            String costo = this.jtCosto.getText();
+            String id = this.jlId.getText();
+
+            if (des.equals("")) {
+                JOptionPane.showMessageDialog(null, "Descipcion Requerida ", "Error", JOptionPane.ERROR_MESSAGE);
+                this.jtDescripcion.requestFocus();
+            } else if (costo.equals("")) {
+                JOptionPane.showMessageDialog(null, "Costo Requerida ", "Error", JOptionPane.ERROR_MESSAGE);
+                this.jtCosto.requestFocus();
+            } else {
+                int confirm = JOptionPane.showConfirmDialog(null, "¿Confirmas los cambios?", "Warning", JOptionPane.WARNING_MESSAGE);
+                if (JOptionPane.OK_OPTION == confirm) {
+                    try {
+                        rm.updateRegistro(Integer.parseInt(id), des, Integer.parseInt(costo));
+                        JOptionPane.showMessageDialog(null, "Datos actualizados!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                        loadDataRegistro();
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnActualizarRegistroActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizarRegistro;
     private javax.swing.JButton btnAddNewRegistro;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JTable dataTableRegistro;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel jlCliente;
+    private javax.swing.JLabel jlId;
+    private javax.swing.JLabel jlPatente;
+    private javax.swing.JLabel jlRut;
+    private javax.swing.JLabel jlVehiculo;
     private javax.swing.JMenuItem jmEditar;
     private javax.swing.JMenuItem jmEliminar;
+    private javax.swing.JTextField jtCosto;
+    private javax.swing.JTextArea jtDescripcion;
     private javax.swing.JPopupMenu mainRegistroTable;
     // End of variables declaration//GEN-END:variables
 }
