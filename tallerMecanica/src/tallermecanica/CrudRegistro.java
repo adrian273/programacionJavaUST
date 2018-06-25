@@ -455,6 +455,11 @@ public class CrudRegistro extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnActualizarRegistroActionPerformed
 
+    /**
+     * TODO boton para exportar datos en txt
+     *
+     * @param evt
+     */
     private void btnExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarActionPerformed
         // TODO add your handling code here:
         try {
@@ -506,7 +511,7 @@ public class CrudRegistro extends javax.swing.JInternalFrame {
             }
 
         } catch (Exception e) {
-
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnExportarActionPerformed
 
