@@ -2,7 +2,13 @@ package tallermecanica;
 
 import java.awt.Frame;
 import java.awt.HeadlessException;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.sql.ResultSet;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -93,6 +99,7 @@ public class CrudRegistro extends javax.swing.JInternalFrame {
         jlRut = new javax.swing.JLabel();
         jlVehiculo = new javax.swing.JLabel();
         jlPatente = new javax.swing.JLabel();
+        btnExportar = new javax.swing.JButton();
 
         jmEliminar.setText("Eliminar");
         jmEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -189,9 +196,9 @@ public class CrudRegistro extends javax.swing.JInternalFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlId)
-                    .addComponent(jLabel7))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(jlId))
                 .addGap(3, 3, 3)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -270,12 +277,21 @@ public class CrudRegistro extends javax.swing.JInternalFrame {
                 .addGap(23, 23, 23))
         );
 
+        btnExportar.setText("Exportar");
+        btnExportar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnExportar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnRefresh)
                 .addGap(29, 29, 29)
                 .addComponent(btnAddNewRegistro)
@@ -297,7 +313,8 @@ public class CrudRegistro extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRefresh)
-                    .addComponent(btnAddNewRegistro))
+                    .addComponent(btnAddNewRegistro)
+                    .addComponent(btnExportar))
                 .addGap(17, 17, 17)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -438,10 +455,66 @@ public class CrudRegistro extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnActualizarRegistroActionPerformed
 
+    private void btnExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarActionPerformed
+        // TODO add your handling code here:
+        try {
+            Date date = new Date();
+            DateFormat df = new SimpleDateFormat("yy-MM-dd.HH_mm_ss");
+            DateFormat dfDos = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
+            String outFile = "docs/registroTaller" + df.format(date) + ".txt";
+            FileWriter fichero = null;
+            PrintWriter pw = null;
+            try {
+                ResultSet rs = rm.dataRegistro();
+                fichero = new FileWriter(outFile);
+                pw = new PrintWriter(fichero);
+                pw.write("Fecha de exportacion de registro: " + dfDos.format(date));
+                pw.write("\n");
+                pw.write("\n");
+                pw.write("\n");
+                while (rs.next()) {
+                    pw.write("Numero Docs: " + rs.getString("idRegistro"));
+                    pw.write("\n");
+                    pw.write("Fecha Registro: " + rs.getString("fechaRegistro"));
+                    pw.write("\n");
+                    pw.write("Costo : " + rs.getString("totalCobroRegistro"));
+                    pw.write("\n");
+                    pw.write("Nombre Cliente: " + rs.getString("nombresCliente") + " " + rs.getString("apellidosCliente"));
+                    pw.write("\n");
+                    pw.write("Rut Cliente: " + rs.getString("rutCliente"));
+                    pw.write("\n");
+                    pw.write("Patente: " + rs.getString("patenteVehiculo"));
+                    pw.write("\n");
+                    pw.write("Modelo: " + rs.getString("modelo"));
+                    pw.write("\n");
+                    pw.write("Año: " + rs.getString("yearVehiculo"));
+                    pw.write("\n");
+                    pw.write("------------------------------------------------------------");
+                    pw.write("\n");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            } finally {
+                try {
+                    if (null != fichero) {
+                        fichero.close();
+                        JOptionPane.showMessageDialog(null, "Archivo Exportado con exito en la carpeta ./" + outFile, "Info", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                } catch (Exception ee) {
+                    JOptionPane.showMessageDialog(null, ee.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+
+        } catch (Exception e) {
+
+        }
+    }//GEN-LAST:event_btnExportarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizarRegistro;
     private javax.swing.JButton btnAddNewRegistro;
+    private javax.swing.JButton btnExportar;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JTable dataTableRegistro;
     private javax.swing.JLabel jLabel1;
