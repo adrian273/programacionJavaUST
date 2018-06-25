@@ -107,8 +107,8 @@ public class VehiculoModel {
      * @throws java.sql.SQLException
      */
     public ResultSet viewDataVehiculo(String p) throws SQLException {
-        String query = "SELECT * FROM vehiculos WHERE patenteVehiculo = '"
-                + p + "';";
+        String query = "SELECT * FROM vehiculos, marcas WHERE patenteVehiculo = '"
+                + p + "' AND marcas_idMarca = idMarca;";
         rs = c.getInstruct().executeQuery(query);
         return rs;
     }

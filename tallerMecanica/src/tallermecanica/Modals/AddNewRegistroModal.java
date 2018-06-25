@@ -1,5 +1,7 @@
 package tallermecanica.Modals;
 
+import java.awt.Frame;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -67,6 +69,11 @@ public class AddNewRegistroModal extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jtDescripcion);
 
         btnVerificarPatente.setText("Verificar Patente");
+        btnVerificarPatente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerificarPatenteActionPerformed(evt);
+            }
+        });
 
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -88,13 +95,12 @@ public class AddNewRegistroModal extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(jtPatente, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnVerificarPatente, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE))
-                        .addComponent(jtCosto, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jScrollPane1)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jtPatente, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnVerificarPatente, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE))
+                    .addComponent(jtCosto, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -185,6 +191,24 @@ public class AddNewRegistroModal extends javax.swing.JDialog {
 
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnVerificarPatenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarPatenteActionPerformed
+        // TODO add your handling code here:
+        try {
+            String patente = this.jtPatente.getText();
+            ResultSet rs = vm.viewDataVehiculo(patente);
+            if (rs.next()) {
+                rs.beforeFirst();
+                Frame frame = new Frame();
+                InformacionVehiculoModal ivm = new InformacionVehiculoModal(frame, true, rs);
+                ivm.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Patente no registrada", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnVerificarPatenteActionPerformed
 
     /**
      * @param args the command line arguments
