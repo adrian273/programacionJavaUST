@@ -5,6 +5,7 @@
  */
 package tallermecanica;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import tallermecanica.Models.ClienteModel;
 import java.awt.Frame;
 import java.awt.HeadlessException;
@@ -29,11 +30,16 @@ public class CrudClientes extends javax.swing.JInternalFrame {
      */
     public CrudClientes() throws ClassNotFoundException, SQLException {
         initComponents();
-        loadDataClient();
-        this.panelEdicionCliente.setVisible(false);
-        this.jpRut.setVisible(false);
+        loadDataClient(); // llamo la fucnion cargar cliente
+        this.panelEdicionCliente.setVisible(false); // oculto el panel de edicion de los datos
+        this.jpRut.setVisible(false); // oculto el panel donde se muestra el rut
     }
-
+    
+    /**
+     * TODO cargar datos del cliente
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
     public void loadDataClient() throws ClassNotFoundException, SQLException {
         String titles[] = {"rut", "nombres", "apellidos", "email", "telefono"};
         dm = new DefaultTableModel(titles, 0);
@@ -333,6 +339,7 @@ public class CrudClientes extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 } catch (SQLException ex) {
                     Logger.getLogger(CrudClientes.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
 
             }
@@ -367,7 +374,11 @@ public class CrudClientes extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_jmEditarActionPerformed
-
+    
+    /**
+     * TODO actualizar los datos del cliente
+     * @param evt 
+     */
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         // TODO add your handling code here:
         try {

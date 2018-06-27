@@ -65,7 +65,7 @@ public class RegistroModel {
     /**
      * TODO Devuelve el dato del registro seleccionado
      * @param id identificador
-     * @return 
+     * @return los registros, clientes y vehiculos con sus marcas dependiendo el id;;
      * @throws java.sql.SQLException 
      */
     public ResultSet viewRegistro(int id) throws SQLException {
@@ -77,7 +77,7 @@ public class RegistroModel {
     }
     
     /**
-     * 
+     * TODO editar los datos de registro
      * @param ident
      * @param des
      * @param cobro 

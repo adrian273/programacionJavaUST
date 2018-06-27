@@ -14,10 +14,15 @@ public class ClienteModel {
     
     private Coneccion c;
     ResultSet rs;
+    
     public ClienteModel() throws ClassNotFoundException {
         c = new Coneccion();
     }
-    
+        
+    /**
+     * TODO agregar nuevo cliente
+     * @param q query consulta agregada
+     */
     public void addNewClient(String q) {
         c.actionRecord(q);
     }

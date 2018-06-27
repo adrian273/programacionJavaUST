@@ -191,7 +191,11 @@ public class AddNewRegistroModal extends javax.swing.JDialog {
 
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
-
+    
+    /**
+     * TODO boton para verificar patente
+     * @param evt 
+     */
     private void btnVerificarPatenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarPatenteActionPerformed
         // TODO add your handling code here:
         try {

@@ -39,7 +39,10 @@ public class CrudAutoMovil extends javax.swing.JInternalFrame {
         loadDataVehiculo();
         cargarCBMarca();
     }
-
+    
+    /**
+     * TODO cargar los datos del vehiculo en la jtabla
+     */
     public void loadDataVehiculo() {
         String titles[] = {"Patente", "Marca", "Modelo", "Color", "AÑo", "Cliente", "Fecha Registro"};
         dm = new DefaultTableModel(titles, 0);
@@ -308,13 +311,21 @@ public class CrudAutoMovil extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /**
+     * TODO refrescar la tabla
+     * @param evt 
+     */
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         // TODO add your handling code here:
         loadDataVehiculo();
         JOptionPane.showMessageDialog(null, "Tabla Actualizada!", "success", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnRefreshActionPerformed
-
+    
+    /**
+     * TODO llamar a la venta modal de agregar nuevo vehiculo
+     * @param evt 
+     */
     private void btnAddNewVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewVehiculoActionPerformed
         // TODO add your handling code here:
         try {

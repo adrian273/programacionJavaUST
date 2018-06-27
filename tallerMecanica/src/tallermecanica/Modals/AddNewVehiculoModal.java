@@ -267,7 +267,11 @@ public class AddNewVehiculoModal extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /**
+     * TODO boton para verificar clientes y mostrar su informacion
+     * @param evt 
+     */
     private void btnVerificarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarClienteActionPerformed
         // TODO add your handling code here:
         String rut = this.jtRut.getText();

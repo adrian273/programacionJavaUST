@@ -90,7 +90,7 @@ public class VehiculoModel {
     }
     
     /**
-     * 
+     * TODO eliminar los datos del vehiculo
      * @param patente 
      */
     public void deleteVehiculo(String patente) {
@@ -114,7 +114,7 @@ public class VehiculoModel {
     }
     
     /**
-     * 
+     * TODO editar los datos del vehiculo
      * @param pa patente
      * @param idMarca [por resolverlo]
      * @param modelo

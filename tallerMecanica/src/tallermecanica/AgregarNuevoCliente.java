@@ -165,7 +165,11 @@ public class AgregarNuevoCliente extends javax.swing.JDialog {
     private void jtApellidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtApellidosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtApellidosActionPerformed
-
+    
+    /**
+     * TODO agregar nuevo cliente
+     * @param evt 
+     */
     private void btnAgregarNuevoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarNuevoClienteActionPerformed
         // TODO add your handling code here:
         try {
