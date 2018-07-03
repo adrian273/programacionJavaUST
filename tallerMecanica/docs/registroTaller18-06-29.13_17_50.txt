@@ -1,0 +1,30 @@
+Fecha de exportacion de registro: 18-06-29 13:17:50
+
+
+Numero Docs: 13
+Fecha Registro: 2018-06-29 13:17:47.0
+Costo : 225
+Nombre Cliente: Esteban   Navarrete 
+Rut Cliente: 12.787.467-0
+Patente: kdrs01
+Modelo: tuckson
+Año: 2019
+------------------------------------------------------------
+Numero Docs: 12
+Fecha Registro: 2018-06-29 12:56:05.0
+Costo : 1122121
+Nombre Cliente: Esteban   Navarrete 
+Rut Cliente: 12.787.467-0
+Patente: srcs02
+Modelo: centra
+Año: 2018
+------------------------------------------------------------
+Numero Docs: 11
+Fecha Registro: 2018-06-26 21:59:36.0
+Costo : 15000
+Nombre Cliente: Esteban   Navarrete 
+Rut Cliente: 12.787.467-0
+Patente: kdrs01
+Modelo: tuckson
+Año: 2019
+------------------------------------------------------------
