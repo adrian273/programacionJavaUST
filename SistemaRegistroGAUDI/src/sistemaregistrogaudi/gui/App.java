@@ -45,17 +45,23 @@ public final class App extends javax.swing.JFrame {
         private String alarmaIncendio;
         private Encargado encargado;
      */
-    public void addDataSala() {
+    public  void addDataSala() {
         Encargado e1 = new Encargado("Programador", 2018, "Juan", "verdugo", "273");
         Encargado e2 = new Encargado("Programador", 2018, "Pedro", "verdugo", "273");
         Encargado e3 = new Encargado("Programador", 2018, "Karen", "verdugo", "273");
         Encargado e4 = new Encargado("Programador", 2018, "Rosa", "verdugo", "273");
         
-        dataSala.put("Sala Uno", new Sala("sala Uno", 5, 6, "Si", "No", e1));
-        dataSala.put("Sala Dos", new Sala("sala Dos", 5, 6, "Si", "No", e2));
-        dataSala.put("Sala Tres", new Sala("sala Tres", 5, 6, "Si", "No", e3));
-        dataSala.put("Sala Cuatro", new Sala("sala Cuatro", 5, 6, "Si", "No", e4));
+        dataSala.put("sala uno", new Sala("sala uno", 5, 6, "Si", "No", e1));
+        dataSala.put("sala dos", new Sala("sala dos", 5, 6, "Si", "No", e2));
+        dataSala.put("sala tres", new Sala("sala tres", 5, 6, "Si", "No", e3));
+        dataSala.put("sala cuatro", new Sala("sala cuatro", 5, 6, "Si", "No", e4));
     }   
+    
+    public static void viewArte() {
+       dataArte.forEach((i) -> {
+           System.out.println(i.getUbicacion().getNombreSala());
+       });
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

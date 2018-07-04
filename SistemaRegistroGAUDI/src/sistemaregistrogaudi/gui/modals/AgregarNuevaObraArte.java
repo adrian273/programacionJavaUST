@@ -13,6 +13,7 @@ import sistemaregistrogaudi.arte.Genero;
 import sistemaregistrogaudi.arte.SizeArte;
 import sistemaregistrogaudi.arte.Tecnica;
 import sistemaregistrogaudi.gui.App;
+import static sistemaregistrogaudi.gui.App.dataSala;
 import sistemaregistrogaudi.vendor.Encargado;
 import sistemaregistrogaudi.vendor.Sala;
 
@@ -38,6 +39,7 @@ public class AgregarNuevaObraArte extends javax.swing.JDialog {
         this.jlMensajeRut.setVisible(false);
         this.identificador = App.dataArte.size() + 1;
         this.jtIdentificador.setText(String.valueOf(this.identificador));
+
     }
 
     /**
@@ -365,26 +367,51 @@ public class AgregarNuevaObraArte extends javax.swing.JDialog {
 
             String key = (String) this.jcSala.getSelectedItem();
 
-            int cantidadLampara = App.dataSala.get(key).getCantidadLampara();
-            int temperatura = App.dataSala.get(key).getTemperatura();
-            String cierreCentralizado = App.dataSala.get(key).getCierreCentralizado();
-            String alarmaIncendio = App.dataSala.get(key).getAlarmaIncendio();
+            if (App.dataSala.containsKey(key)) {
+                int cantidadLampara = App.dataSala.get(key).getCantidadLampara();
+                int temperatura = App.dataSala.get(key).getTemperatura();
+                String cierreCentralizado = App.dataSala.get(key).getCierreCentralizado();
+                String alarmaIncendio = App.dataSala.get(key).getAlarmaIncendio();
 
-            Encargado encargado = new Encargado(
-                    App.dataSala.get(key).getEncargado().getProfesion(),
-                    App.dataSala.get(key).getEncargado().getYearIngreso(),
-                    App.dataSala.get(key).getEncargado().getNombre(),
-                    App.dataSala.get(key).getEncargado().getApellido(),
-                    App.dataSala.get(key).getEncargado().getRut()
-            );
+                Encargado encargado = new Encargado(
+                        App.dataSala.get(key).getEncargado().getProfesion(),
+                        App.dataSala.get(key).getEncargado().getYearIngreso(),
+                        App.dataSala.get(key).getEncargado().getNombre(),
+                        App.dataSala.get(key).getEncargado().getApellido(),
+                        App.dataSala.get(key).getEncargado().getRut()
+                );
 
-            Sala sala = new Sala(key, cantidadLampara, temperatura, cierreCentralizado, alarmaIncendio, encargado);
-            int id = Integer.parseInt(this.jtIdentificador.getText());
-            
-            Arte obraArte = new Arte(autor, tecnica, genero, year, nombreP, size, sala, id);
-            
-            App.dataArte.add(obraArte);
-            
+                Sala sala = new Sala(
+                        key, cantidadLampara, temperatura,
+                        cierreCentralizado, alarmaIncendio, encargado
+                );
+
+                int id = Integer.parseInt(this.jtIdentificador.getText());
+
+                Arte obraArte = new Arte(
+                        autor, tecnica, genero, year, nombreP,
+                        size, sala, id
+                );
+                App.dataArte.add(obraArte);
+                this.identificador = App.dataArte.size() + 1;
+                this.jtIdentificador.setText(String.valueOf(this.identificador));
+                JOptionPane.showMessageDialog(null, "Agregado con exito");
+
+                /**
+                 * Resetiar los jtTexfiel
+                 */
+                this.jtRut.setText("");
+                this.jtNombre.setText("");
+                this.jtApellido.setText("");
+                this.jtNacionalidad.setText("");
+                this.jtYear.setText("");
+                this.jtNombrePintura.setText("");
+                this.jtAncho.setText("");
+                this.jtAncho.setText("");
+            } else {
+                JOptionPane.showMessageDialog(null, "[Error] No se encuentra el identificador");
+            }
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -418,6 +445,9 @@ public class AgregarNuevaObraArte extends javax.swing.JDialog {
         }
         if (rut.equals("")) {
             this.jlMensajeRut.setVisible(false);
+            this.jtNombre.setText("");
+            this.jtApellido.setText("");
+            this.jtNacionalidad.setText("");
         }
     }//GEN-LAST:event_jtRutKeyReleased
 

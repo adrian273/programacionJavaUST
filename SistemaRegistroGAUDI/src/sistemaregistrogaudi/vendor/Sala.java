@@ -1,6 +1,8 @@
 
 package sistemaregistrogaudi.vendor;
 
+import java.util.Objects;
+
 /**
  *
  * @author adrian
@@ -77,5 +79,33 @@ public class Sala {
     public String toString() {
         return "Sala{" + "nombreSala=" + nombreSala + ", cantidadLampara=" + cantidadLampara + ", temperatura=" + temperatura + ", cierreCentralizado=" + cierreCentralizado + ", alarmaIncendio=" + alarmaIncendio + ", encargado=" + encargado + '}';
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + Objects.hashCode(this.nombreSala);
+        hash = 79 * hash + this.cantidadLampara;
+        hash = 79 * hash + this.temperatura;
+        hash = 79 * hash + Objects.hashCode(this.cierreCentralizado);
+        hash = 79 * hash + Objects.hashCode(this.alarmaIncendio);
+        hash = 79 * hash + Objects.hashCode(this.encargado);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Sala other = (Sala) obj;
+        return true;
+    }
    
+    
 }
