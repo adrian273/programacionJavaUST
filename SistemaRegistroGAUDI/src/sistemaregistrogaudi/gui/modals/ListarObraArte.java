@@ -26,7 +26,7 @@ public class ListarObraArte extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.nombreSala = nombreSala;
-        
+
         listarData();
     }
 
@@ -35,24 +35,29 @@ public class ListarObraArte extends javax.swing.JDialog {
     }
 
     public void listarData() {
-        if (App.dataArte.size() > 0) {
-            if (1==1) {
-                String titles[] = {"nombre Pintura", "Sala"};
-                dm = new DefaultTableModel(titles, 0);
-                App.dataArte.forEach((i) -> {
-                    if (i.getUbicacion().getNombreSala().equals(this.nombreSala)) {
-                        String nombre = i.getNombreObra();
-                        String nombreSala = i.getUbicacion().getNombreSala();
-                        Object data[] = {nombre, nombreSala};
-                        dm.addRow(data);
-                    }
-                });
-                this.jtDataArteSearch.setModel(dm);
+        try {
+            if (App.dataArte.size() > 0) {
+                if (1 == 1) {
+                    String titles[] = {"nombre Pintura", "Sala"};
+                    dm = new DefaultTableModel(titles, 0);
+                    App.dataArte.forEach((i) -> {
+                        if (i.getUbicacion().getNombreSala().equals(this.nombreSala)) {
+                            String nombre = i.getNombreObra();
+                            String nombreSala = i.getUbicacion().getNombreSala();
+                            Object data[] = {nombre, nombreSala};
+                            dm.addRow(data);
+                        }
+                    });
+                    this.jtDataArteSearch.setModel(dm);
+                } else {
+                    JOptionPane.showMessageDialog(null, "No contiene Key");
+                }
             } else {
-                JOptionPane.showMessageDialog(null, "No contiene Key");
+                JOptionPane.showMessageDialog(null, "No hay datos");
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "No hay datos");
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 

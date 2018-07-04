@@ -18,6 +18,7 @@ public final class App extends javax.swing.JFrame {
     public static HashMap<String, Sala> dataSala = new HashMap<>();
     //public static HashMap<Integer, Arte> dataArte = new HashMap<>();
     public static ArrayList<Arte> dataArte = new ArrayList<>();
+
     /**
      * Creates new form App
      */
@@ -26,37 +27,42 @@ public final class App extends javax.swing.JFrame {
         addDataAutor();
         addDataSala();
     }
-    
+
     /**
      * TODO Cargar Datos en el hasmap de dataAutor;;
      */
     public void addDataAutor() {
-        dataAutor.put("1", new Autor("Chileno", "Adrian", "Verdugo", "1"));
-        dataAutor.put("2", new Autor("Peruano", "Luis", "Diaz", "2"));
-        dataAutor.put("3", new Autor("Boliviano", "Juan", "Perez", "3"));
+        try {
+            dataAutor.put("1", new Autor("Chileno", "Adrian", "Verdugo", "1"));
+            dataAutor.put("2", new Autor("Peruano", "Luis", "Diaz", "2"));
+            dataAutor.put("3", new Autor("Boliviano", "Juan", "Perez", "3"));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
-    
+
     /**
-     * TODO cargar datos de la sala;;
-     *  private String nombreSala;
-        private int cantidadLampara;
-        private int temperatura;
-        private String cierreCentralizado;
-        private String alarmaIncendio;
-        private Encargado encargado;
+     * TODO cargar datos de la sala;; private String nombreSala; private int
+     * cantidadLampara; private int temperatura; private String
+     * cierreCentralizado; private String alarmaIncendio; private Encargado
+     * encargado;
      */
-    public  void addDataSala() {
-        Encargado e1 = new Encargado("Programador", 2018, "Juan", "verdugo", "273");
-        Encargado e2 = new Encargado("Programador", 2018, "Pedro", "verdugo", "273");
-        Encargado e3 = new Encargado("Programador", 2018, "Karen", "verdugo", "273");
-        Encargado e4 = new Encargado("Programador", 2018, "Rosa", "verdugo", "273");
-        
-        dataSala.put("sala uno", new Sala("sala uno", 5, 6, "Si", "No", e1));
-        dataSala.put("sala dos", new Sala("sala dos", 5, 6, "Si", "No", e2));
-        dataSala.put("sala tres", new Sala("sala tres", 5, 6, "Si", "No", e3));
-        dataSala.put("sala cuatro", new Sala("sala cuatro", 5, 6, "Si", "No", e4));
-    }   
-    
+    public void addDataSala() {
+        try {
+            Encargado e1 = new Encargado("Programador", 2018, "Juan", "verdugo", "273");
+            Encargado e2 = new Encargado("Programador", 2018, "Pedro", "verdugo", "273");
+            Encargado e3 = new Encargado("Programador", 2018, "Karen", "verdugo", "273");
+            Encargado e4 = new Encargado("Programador", 2018, "Rosa", "verdugo", "273");
+
+            dataSala.put("sala uno", new Sala("sala uno", 5, 6, "Si", "No", e1));
+            dataSala.put("sala dos", new Sala("sala dos", 5, 6, "Si", "No", e2));
+            dataSala.put("sala tres", new Sala("sala tres", 5, 6, "Si", "No", e3));
+            dataSala.put("sala cuatro", new Sala("sala cuatro", 5, 6, "Si", "No", e4));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     public static void viewArte() {
         for (int i = 0; dataArte.size() < 10; i++) {
             System.out.println(dataArte.get(i).getId());

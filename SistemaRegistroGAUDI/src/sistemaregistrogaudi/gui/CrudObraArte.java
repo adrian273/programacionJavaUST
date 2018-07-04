@@ -221,7 +221,13 @@ public class CrudObraArte extends javax.swing.JInternalFrame {
      */
     private void btnTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTotalActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "Total Obra Arte: " + App.dataArte.size(), "Info", JOptionPane.INFORMATION_MESSAGE);
+        try {
+            JOptionPane.showMessageDialog(null, "Total Obra Arte: " + App.dataArte.size(), "Info", JOptionPane.INFORMATION_MESSAGE);
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(),"Error" ,JOptionPane.ERROR_MESSAGE);
+        }
+        
     }//GEN-LAST:event_btnTotalActionPerformed
 
 

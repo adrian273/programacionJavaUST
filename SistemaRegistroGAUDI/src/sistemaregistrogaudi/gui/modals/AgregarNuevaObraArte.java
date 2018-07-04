@@ -415,7 +415,7 @@ public class AgregarNuevaObraArte extends javax.swing.JDialog {
             }
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
 
 
@@ -432,24 +432,28 @@ public class AgregarNuevaObraArte extends javax.swing.JDialog {
 
     private void jtRutKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtRutKeyReleased
         // TODO add your handling code here:
-        String rut = this.jtRut.getText();
+        try {
+            String rut = this.jtRut.getText();
 
-        if (App.dataAutor.containsKey(rut)) {
-            this.jtNombre.setText(App.dataAutor.get(rut).getNombre());
-            this.jtApellido.setText(App.dataAutor.get(rut).getApellido());
-            this.jtNacionalidad.setText(App.dataAutor.get(rut).getNacional());
-            this.jlMensajeRut.setVisible(false);
-        } else {
-            this.jtNombre.setText("");
-            this.jtApellido.setText("");
-            this.jtNacionalidad.setText("");
-            this.jlMensajeRut.setVisible(true);
-        }
-        if (rut.equals("")) {
-            this.jlMensajeRut.setVisible(false);
-            this.jtNombre.setText("");
-            this.jtApellido.setText("");
-            this.jtNacionalidad.setText("");
+            if (App.dataAutor.containsKey(rut)) {
+                this.jtNombre.setText(App.dataAutor.get(rut).getNombre());
+                this.jtApellido.setText(App.dataAutor.get(rut).getApellido());
+                this.jtNacionalidad.setText(App.dataAutor.get(rut).getNacional());
+                this.jlMensajeRut.setVisible(false);
+            } else {
+                this.jtNombre.setText("");
+                this.jtApellido.setText("");
+                this.jtNacionalidad.setText("");
+                this.jlMensajeRut.setVisible(true);
+            }
+            if (rut.equals("")) {
+                this.jlMensajeRut.setVisible(false);
+                this.jtNombre.setText("");
+                this.jtApellido.setText("");
+                this.jtNacionalidad.setText("");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jtRutKeyReleased
 
