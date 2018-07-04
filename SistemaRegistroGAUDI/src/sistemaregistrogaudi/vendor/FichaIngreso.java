@@ -1,8 +1,7 @@
 
-package sistemaregistrogaudi;
+package sistemaregistrogaudi.vendor;
 
 import sistemaregistrogaudi.arte.Arte;
-import sistemaregistrogaudi.vendor.Sala;
 
 /**
  *
