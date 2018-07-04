@@ -58,9 +58,9 @@ public final class App extends javax.swing.JFrame {
     }   
     
     public static void viewArte() {
-       dataArte.forEach((i) -> {
-           System.out.println(i.getUbicacion().getNombreSala());
-       });
+        for (int i = 0; dataArte.size() < 10; i++) {
+            System.out.println(dataArte.get(i).getId());
+        }
     }
 
     /**

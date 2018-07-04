@@ -15,7 +15,9 @@ import sistemaregistrogaudi.gui.modals.AgregarNuevaObraArte;
  * @author adrian
  */
 public class CrudObraArte extends javax.swing.JInternalFrame {
+
     DefaultTableModel dm = new DefaultTableModel();
+
     /**
      * Creates new form CrudObraArte
      */
@@ -23,11 +25,15 @@ public class CrudObraArte extends javax.swing.JInternalFrame {
         initComponents();
         loadDataArte();
     }
-    
+
+    /**
+     * loadDataArte();;
+     */
     public void loadDataArte() {
-        String titles[] = {"Autor", "Tecnica", "Genero", "Año", "Ancho", "Alto", "Ubicacion", "ident"};
+        String titles[] = {"Nombre Pintura", "Autor", "Tecnica", "Genero", "Año", "Ancho", "Alto", "Ubicacion", "ident"};
         dm = new DefaultTableModel(titles, 0);
         for (int i = 0; i < App.dataArte.size(); i++) {
+            String np = App.dataArte.get(i).getNombreObra();
             String n = App.dataArte.get(i).getAutor().getNombre();
             String t = App.dataArte.get(i).getTecnica().name();
             String g = App.dataArte.get(i).getGenero().name();
@@ -36,11 +42,12 @@ public class CrudObraArte extends javax.swing.JInternalFrame {
             int alto = App.dataArte.get(i).getTamano().getAlto();
             String ubi = App.dataArte.get(i).getUbicacion().getNombreSala();
             int ident = App.dataArte.get(i).getId();
-            Object data[] = {n, t, g, year, ancho, alto, ubi, ident};
+            Object data[] = {np, n, t, g, year, ancho, alto, ubi, ident};
             dm.addRow(data);
         }
         this.jTable1.setModel(dm);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,9 +57,20 @@ public class CrudObraArte extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jpMenu = new javax.swing.JPopupMenu();
+        jmEliminar = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btnAddNewObra = new javax.swing.JButton();
+        btnRecargar = new javax.swing.JButton();
+
+        jmEliminar.setText("Eliminar");
+        jmEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmEliminarActionPerformed(evt);
+            }
+        });
+        jpMenu.add(jmEliminar);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -65,6 +83,7 @@ public class CrudObraArte extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.setComponentPopupMenu(jpMenu);
         jScrollPane1.setViewportView(jTable1);
 
         btnAddNewObra.setText("Agregar");
@@ -74,16 +93,25 @@ public class CrudObraArte extends javax.swing.JInternalFrame {
             }
         });
 
+        btnRecargar.setText("Recargar");
+        btnRecargar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRecargarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 924, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnRecargar)
+                .addGap(35, 35, 35)
                 .addComponent(btnAddNewObra, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(66, 66, 66))
         );
@@ -91,7 +119,9 @@ public class CrudObraArte extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(btnAddNewObra)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddNewObra)
+                    .addComponent(btnRecargar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(204, Short.MAX_VALUE))
@@ -111,10 +141,42 @@ public class CrudObraArte extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnAddNewObraActionPerformed
 
+    /**
+     * Boton recargar datos de la tabla de arte
+     *
+     * @param evt
+     */
+    private void btnRecargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecargarActionPerformed
+        // TODO add your handling code here:
+        loadDataArte();
+    }//GEN-LAST:event_btnRecargarActionPerformed
+    
+    /**
+     * TODO Elinar registro de obra de arte
+     * @param evt 
+     */
+    private void jmEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmEliminarActionPerformed
+        // TODO add your handling code here:
+        try {
+            int reg = this.jTable1.getSelectedRow();
+            int confirm = JOptionPane.showConfirmDialog(null, "¿ Seguro de eliminar este registro ?");
+            if(JOptionPane.OK_OPTION == confirm) {
+                App.dataArte.remove(reg);
+                JOptionPane.showMessageDialog(null, "Eliminado con exito!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                loadDataArte();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage() + " " + e, "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jmEliminarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddNewObra;
+    private javax.swing.JButton btnRecargar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JMenuItem jmEliminar;
+    private javax.swing.JPopupMenu jpMenu;
     // End of variables declaration//GEN-END:variables
 }
