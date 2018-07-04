@@ -17,7 +17,7 @@ import sistemaregistrogaudi.gui.modals.ListarObraArte;
  */
 public class CrudObraArte extends javax.swing.JInternalFrame {
 
-    DefaultTableModel dm = new DefaultTableModel();
+    public static DefaultTableModel dm = new DefaultTableModel();
 
     /**
      * Creates new form CrudObraArte
@@ -33,7 +33,7 @@ public class CrudObraArte extends javax.swing.JInternalFrame {
     /**
      * loadDataArte();;
      */
-    public void loadDataArte() {
+    public static void loadDataArte() {
         String titles[] = {"Nombre Pintura", "Autor", "Tecnica", "Genero", "Año", "Ancho", "Alto", "Ubicacion", "ident"};
         dm = new DefaultTableModel(titles, 0);
         for (int i = 0; i < App.dataArte.size(); i++) {
@@ -49,7 +49,7 @@ public class CrudObraArte extends javax.swing.JInternalFrame {
             Object data[] = {np, n, t, g, year, ancho, alto, ubi, ident};
             dm.addRow(data);
         }
-        this.jTable1.setModel(dm);
+        CrudObraArte.jTable1.setModel(dm);
     }
 
     /**
@@ -66,7 +66,6 @@ public class CrudObraArte extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btnAddNewObra = new javax.swing.JButton();
-        btnRecargar = new javax.swing.JButton();
         btnListar = new javax.swing.JButton();
         jcTipoSala = new javax.swing.JComboBox<>();
         btnTotal = new javax.swing.JButton();
@@ -100,13 +99,6 @@ public class CrudObraArte extends javax.swing.JInternalFrame {
             }
         });
 
-        btnRecargar.setText("Recargar");
-        btnRecargar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRecargarActionPerformed(evt);
-            }
-        });
-
         btnListar.setText("Buscar Pintura por Sala");
         btnListar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,17 +123,15 @@ public class CrudObraArte extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 924, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnListar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jcTipoSala, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(165, 165, 165)
-                        .addComponent(btnTotal)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnRecargar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAddNewObra, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(btnAddNewObra, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -150,7 +140,6 @@ public class CrudObraArte extends javax.swing.JInternalFrame {
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAddNewObra)
-                    .addComponent(btnRecargar)
                     .addComponent(btnListar)
                     .addComponent(jcTipoSala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTotal))
@@ -172,16 +161,6 @@ public class CrudObraArte extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e.getMessage() + " " + e, "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnAddNewObraActionPerformed
-
-    /**
-     * Boton recargar datos de la tabla de arte
-     *
-     * @param evt
-     */
-    private void btnRecargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecargarActionPerformed
-        // TODO add your handling code here:
-        loadDataArte();
-    }//GEN-LAST:event_btnRecargarActionPerformed
 
     /**
      * TODO Elinar registro de obra de arte
@@ -227,7 +206,11 @@ public class CrudObraArte extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e.getMessage() + " " + e, "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnListarActionPerformed
-
+    
+    /**
+     * TODO mostrar total de las obras totales
+     * @param evt 
+     */
     private void btnTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTotalActionPerformed
         // TODO add your handling code here:
         JOptionPane.showMessageDialog(null, "Total Obra Arte: " + App.dataArte.size(), "Info", JOptionPane.INFORMATION_MESSAGE);
@@ -237,10 +220,9 @@ public class CrudObraArte extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddNewObra;
     private javax.swing.JButton btnListar;
-    private javax.swing.JButton btnRecargar;
     private javax.swing.JButton btnTotal;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    public static javax.swing.JTable jTable1;
     private javax.swing.JComboBox<String> jcTipoSala;
     private javax.swing.JMenuItem jmEliminar;
     private javax.swing.JPopupMenu jpMenu;

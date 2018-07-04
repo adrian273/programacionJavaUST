@@ -14,6 +14,7 @@ import sistemaregistrogaudi.arte.SizeArte;
 import sistemaregistrogaudi.arte.Tecnica;
 import sistemaregistrogaudi.gui.App;
 import static sistemaregistrogaudi.gui.App.dataSala;
+import sistemaregistrogaudi.gui.CrudObraArte;
 import sistemaregistrogaudi.vendor.Encargado;
 import sistemaregistrogaudi.vendor.Sala;
 
@@ -407,7 +408,8 @@ public class AgregarNuevaObraArte extends javax.swing.JDialog {
                 this.jtYear.setText("");
                 this.jtNombrePintura.setText("");
                 this.jtAncho.setText("");
-                this.jtAncho.setText("");
+                this.jtAltura.setText("");
+                CrudObraArte.loadDataArte();
             } else {
                 JOptionPane.showMessageDialog(null, "[Error] No se encuentra el identificador");
             }
