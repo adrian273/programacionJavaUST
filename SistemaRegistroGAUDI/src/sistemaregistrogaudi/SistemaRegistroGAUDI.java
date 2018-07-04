@@ -1,7 +1,8 @@
 
 package sistemaregistrogaudi;
 
-import sistemaregistrogaudi.gui.App;
+//import sistemaregistrogaudi.gui.App;
+import sistemaregistrogaudi.gui.Login;
 
 /**
  *
@@ -11,7 +12,7 @@ public class SistemaRegistroGAUDI {
 
     
     public static void main(String[] args) {
-       new App().setVisible(true);
+       new Login().setVisible(true);
     }
     
 }

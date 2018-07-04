@@ -34,22 +34,27 @@ public class CrudObraArte extends javax.swing.JInternalFrame {
      * loadDataArte();;
      */
     public static void loadDataArte() {
-        String titles[] = {"Nombre Pintura", "Autor", "Tecnica", "Genero", "Año", "Ancho", "Alto", "Ubicacion", "ident"};
-        dm = new DefaultTableModel(titles, 0);
-        for (int i = 0; i < App.dataArte.size(); i++) {
-            String np = App.dataArte.get(i).getNombreObra();
-            String n = App.dataArte.get(i).getAutor().getNombre();
-            String t = App.dataArte.get(i).getTecnica().name();
-            String g = App.dataArte.get(i).getGenero().name();
-            int year = App.dataArte.get(i).getYear();
-            int ancho = App.dataArte.get(i).getTamano().getAncho();
-            int alto = App.dataArte.get(i).getTamano().getAlto();
-            String ubi = App.dataArte.get(i).getUbicacion().getNombreSala();
-            int ident = App.dataArte.get(i).getId();
-            Object data[] = {np, n, t, g, year, ancho, alto, ubi, ident};
-            dm.addRow(data);
+        try {
+            String titles[] = {"Nombre Pintura", "Autor", "Tecnica", "Genero", "Año", "Ancho", "Alto", "Ubicacion", "ident"};
+            dm = new DefaultTableModel(titles, 0);
+            for (int i = 0; i < App.dataArte.size(); i++) {
+                String np = App.dataArte.get(i).getNombreObra();
+                String n = App.dataArte.get(i).getAutor().getNombre();
+                String t = App.dataArte.get(i).getTecnica().name();
+                String g = App.dataArte.get(i).getGenero().name();
+                int year = App.dataArte.get(i).getYear();
+                int ancho = App.dataArte.get(i).getTamano().getAncho();
+                int alto = App.dataArte.get(i).getTamano().getAlto();
+                String ubi = App.dataArte.get(i).getUbicacion().getNombreSala();
+                int ident = App.dataArte.get(i).getId();
+                Object data[] = {np, n, t, g, year, ancho, alto, ubi, ident};
+                dm.addRow(data);
+            }
+            CrudObraArte.jTable1.setModel(dm);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-        CrudObraArte.jTable1.setModel(dm);
+
     }
 
     /**
@@ -181,10 +186,12 @@ public class CrudObraArte extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e.getMessage() + " " + e, "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jmEliminarActionPerformed
-    
-    /***
+
+    /**
+     * *
      * TODO Listar Datos de Obra de Arte por Nombre Sala
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
         // TODO add your handling code here:
@@ -206,10 +213,11 @@ public class CrudObraArte extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e.getMessage() + " " + e, "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnListarActionPerformed
-    
+
     /**
      * TODO mostrar total de las obras totales
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTotalActionPerformed
         // TODO add your handling code here:
